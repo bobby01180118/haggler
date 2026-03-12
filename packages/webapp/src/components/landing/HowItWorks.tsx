@@ -1,69 +1,95 @@
-import { MessageSquare, Search, CheckCircle } from 'lucide-react'
+import { MessageSquare, Search, CheckCircle, Zap } from 'lucide-react'
+import { motion } from 'framer-motion'
 
 const steps = [
   {
     icon: MessageSquare,
-    title: 'You say what you want',
-    description: 'Type a simple command like "Buy 1 ETH at the best price"',
-    example: 'Buy 1 ETH best price',
+    title: 'Tell Arbiter what you want',
+    description: 'Natural language input — "Buy 1 ETH at the best price"',
+    accent: '#10b981',
   },
   {
     icon: Search,
-    title: 'Arbiter checks every venue',
-    description: 'Simultaneously queries OKX Smart Trading, Binance, and 1inch for the best deal',
-    example: 'Checking 3 venues...',
+    title: 'Scans 11 venues instantly',
+    description: 'CEXs, DEXs, and brokers checked in parallel for the best deal',
+    accent: '#06b6d4',
+  },
+  {
+    icon: Zap,
+    title: 'Negotiates on your behalf',
+    description: 'Leverages OKX smart trading to haggle for a better price',
+    accent: '#8b5cf6',
   },
   {
     icon: CheckCircle,
-    title: 'You get the best deal',
-    description: 'See a transparent comparison and execute on the cheapest venue with one click',
-    example: 'Save $14 vs Binance',
+    title: 'Execute with one click',
+    description: 'Transparent comparison, then trade on the cheapest venue',
+    accent: '#10b981',
   },
 ]
 
 export default function HowItWorks() {
   return (
-    <section className="py-20">
-      <div className="max-w-5xl mx-auto px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-zinc-50 mb-4">
-          How it works
-        </h2>
-        <p className="text-center text-zinc-500 mb-12">Three steps. Under 10 seconds.</p>
+    <section className="py-24">
+      <div className="max-w-6xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-bold text-white mb-4"
+          >
+            How it works
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-zinc-500 text-lg"
+          >
+            Four steps. Under 10 seconds.
+          </motion.p>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, i) => (
-            <div
+            <motion.div
               key={i}
-              className="relative bg-zinc-900 border border-zinc-800 rounded-2xl p-6 hover:border-zinc-700 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="relative group"
             >
-              {/* Step number */}
-              <div className="absolute -top-3 -left-1 text-5xl font-bold text-zinc-800/60">
-                {i + 1}
-              </div>
-
-              <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center mb-4">
-                  <step.icon className="w-5 h-5 text-emerald-500" />
+              <div className="glass-card rounded-2xl p-6 h-full hover:border-zinc-600/60 transition-all duration-300">
+                {/* Step number */}
+                <div className="text-6xl font-bold text-zinc-800/40 absolute top-4 right-4">
+                  {i + 1}
                 </div>
 
-                <h3 className="text-lg font-semibold text-zinc-50 mb-2">{step.title}</h3>
-                <p className="text-sm text-zinc-400 mb-4">{step.description}</p>
+                <div className="relative">
+                  <div
+                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                    style={{ background: `${step.accent}15` }}
+                  >
+                    <step.icon className="w-6 h-6" style={{ color: step.accent }} />
+                  </div>
 
-                {/* Code-style example */}
-                <div className="bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-2">
-                  <code className="text-xs font-mono text-emerald-400">{step.example}</code>
+                  <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-zinc-400 leading-relaxed">{step.description}</p>
                 </div>
               </div>
 
-              {/* Connecting arrow (hidden on mobile) */}
+              {/* Connector line (hidden on mobile) */}
               {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-1/2 -right-3 w-6 text-zinc-700 z-10">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 text-zinc-700 z-10">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

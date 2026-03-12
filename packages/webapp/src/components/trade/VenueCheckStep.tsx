@@ -4,15 +4,31 @@ import { formatCurrency } from '@arbiter/core'
 import { Loader2, CheckCircle2 } from 'lucide-react'
 
 const VENUE_COLORS: Record<string, string> = {
-  okx: 'text-white',
   binance: 'text-yellow-400',
-  '1inch': 'text-blue-400',
+  coinbase: 'text-blue-400',
+  okx: 'text-white',
+  bybit: 'text-amber-400',
+  kraken: 'text-violet-400',
+  uniswap: 'text-pink-400',
+  jupiter: 'text-emerald-400',
+  pancakeswap: 'text-orange-400',
+  curve: 'text-red-400',
+  '1inch': 'text-slate-300',
+  robinhood: 'text-green-400',
 }
 
 const VENUE_BG: Record<string, string> = {
-  okx: 'bg-white/10',
   binance: 'bg-yellow-400/10',
-  '1inch': 'bg-blue-400/10',
+  coinbase: 'bg-blue-400/10',
+  okx: 'bg-white/10',
+  bybit: 'bg-amber-400/10',
+  kraken: 'bg-violet-400/10',
+  uniswap: 'bg-pink-400/10',
+  jupiter: 'bg-emerald-400/10',
+  pancakeswap: 'bg-orange-400/10',
+  curve: 'bg-red-400/10',
+  '1inch': 'bg-slate-400/10',
+  robinhood: 'bg-green-400/10',
 }
 
 interface Props {
@@ -30,9 +46,9 @@ export default function VenueCheckStep({ step }: Props) {
       animate={{ opacity: 1, y: 0 }}
       className="flex items-start gap-2"
     >
-      <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${VENUE_BG[venue]}`}>
+      <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${VENUE_BG[venue] ?? 'bg-zinc-700/50'}`}>
         {isChecking ? (
-          <Loader2 className={`w-3.5 h-3.5 animate-spin ${VENUE_COLORS[venue]}`} />
+          <Loader2 className={`w-3.5 h-3.5 animate-spin ${VENUE_COLORS[venue] ?? 'text-zinc-400'}`} />
         ) : (
           <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
         )}
@@ -44,7 +60,7 @@ export default function VenueCheckStep({ step }: Props) {
         ) : (
           <div className="space-y-1">
             <div className="text-zinc-50">
-              <span className={VENUE_COLORS[venue]}>{quote?.venueName}</span>
+              <span className={VENUE_COLORS[venue] ?? 'text-zinc-300'}>{quote?.venueName}</span>
               {' — '}
               <span className="font-mono font-semibold">{quote ? formatCurrency(quote.price) : ''}</span>
               {quote?.negotiated && (

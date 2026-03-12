@@ -10,13 +10,7 @@ interface VenueConfig {
 }
 
 const VENUE_CONFIGS: Record<VenueName, VenueConfig> = {
-  okx: {
-    name: 'OKX Smart Trading',
-    spreadRange: [-0.0015, -0.0005], // Usually cheaper (negotiation advantage)
-    feeRate: 0.0006,
-    flatFee: 0,
-    negotiated: true,
-  },
+  // CEX venues
   binance: {
     name: 'Binance',
     spreadRange: [0.001, 0.003],
@@ -24,14 +18,87 @@ const VENUE_CONFIGS: Record<VenueName, VenueConfig> = {
     flatFee: 0,
     negotiated: false,
   },
+  coinbase: {
+    name: 'Coinbase',
+    spreadRange: [0.002, 0.005],
+    feeRate: 0.006,
+    flatFee: 0,
+    negotiated: false,
+  },
+  okx: {
+    name: 'OKX',
+    spreadRange: [-0.0015, -0.0005],
+    feeRate: 0.0006,
+    flatFee: 0,
+    negotiated: true,
+  },
+  bybit: {
+    name: 'Bybit',
+    spreadRange: [0.0008, 0.0025],
+    feeRate: 0.001,
+    flatFee: 0,
+    negotiated: false,
+  },
+  kraken: {
+    name: 'Kraken',
+    spreadRange: [0.001, 0.004],
+    feeRate: 0.0026,
+    flatFee: 0,
+    negotiated: false,
+  },
+
+  // DEX venues
+  uniswap: {
+    name: 'Uniswap',
+    spreadRange: [0.0005, 0.002],
+    feeRate: 0.003,
+    flatFee: 8,
+    negotiated: false,
+  },
+  jupiter: {
+    name: 'Jupiter',
+    spreadRange: [0.0003, 0.0015],
+    feeRate: 0.0025,
+    flatFee: 0.5,
+    negotiated: false,
+  },
+  pancakeswap: {
+    name: 'PancakeSwap',
+    spreadRange: [0.0008, 0.0022],
+    feeRate: 0.0025,
+    flatFee: 3,
+    negotiated: false,
+  },
+  curve: {
+    name: 'Curve',
+    spreadRange: [0.0002, 0.001],
+    feeRate: 0.0004,
+    flatFee: 12,
+    negotiated: false,
+  },
   '1inch': {
-    name: '1inch (DEX)',
+    name: '1inch',
     spreadRange: [0.0005, 0.0025],
     feeRate: 0.003,
-    flatFee: 5, // Simulated gas fee
+    flatFee: 5,
+    negotiated: false,
+  },
+
+  // Broker
+  robinhood: {
+    name: 'Robinhood',
+    spreadRange: [0.004, 0.008],
+    feeRate: 0,
+    flatFee: 0,
     negotiated: false,
   },
 }
+
+export const ALL_VENUES: VenueName[] = [
+  'binance', 'coinbase', 'okx', 'bybit', 'kraken',
+  'uniswap', 'jupiter', 'pancakeswap', 'curve', '1inch',
+  'robinhood',
+]
 
 export function generateQuote(
   venue: VenueName,
@@ -64,7 +131,7 @@ export function generateQuote(
 export function generateAllQuotes(
   token: string,
   amount: number,
-  venues: VenueName[] = ['okx', 'binance', '1inch']
+  venues: VenueName[] = ALL_VENUES
 ): VenueQuote[] {
   return venues.map(v => generateQuote(v, token, amount))
 }

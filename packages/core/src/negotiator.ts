@@ -14,7 +14,7 @@ export function simulateNegotiation(token: string, amount: number): NegotiationT
   // Round 1: Exchange offers
   steps.push({
     role: 'exchange',
-    message: `OKX Smart Trading: I can offer ${token} at $${exchangeInitialPrice.toFixed(2)} per unit.`,
+    message: `OKX: I can offer ${token} at $${exchangeInitialPrice.toFixed(2)} per unit.`,
     price: exchangeInitialPrice,
   })
 

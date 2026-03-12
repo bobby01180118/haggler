@@ -7,7 +7,7 @@ import type {
   VenueName,
 } from './types.js'
 import { parseTradeInput } from './parser.js'
-import { generateQuote } from './venues.js'
+import { generateQuote, ALL_VENUES } from './venues.js'
 import { simulateNegotiation } from './negotiator.js'
 import { TIMING, randomInRange, sleep } from './delays.js'
 import { formatCurrency, formatTokenAmount } from './formatters.js'
@@ -27,11 +27,38 @@ export function createArbiter(): ArbiterEngine {
   return { comparePrices, negotiate, executeTrade }
 }
 
+const TIMING_KEYS: Record<VenueName, string> = {
+  binance: 'binanceCheck',
+  coinbase: 'coinbaseCheck',
+  okx: 'okxCheck',
+  bybit: 'bybitCheck',
+  kraken: 'krakenCheck',
+  uniswap: 'uniswapCheck',
+  jupiter: 'jupiterCheck',
+  pancakeswap: 'pancakeswapCheck',
+  curve: 'curveCheck',
+  '1inch': 'inchCheck',
+  robinhood: 'robinhoodCheck',
+}
+
+const VENUE_DISPLAY: Record<VenueName, string> = {
+  binance: 'Binance',
+  coinbase: 'Coinbase',
+  okx: 'OKX',
+  bybit: 'Bybit',
+  kraken: 'Kraken',
+  uniswap: 'Uniswap',
+  jupiter: 'Jupiter',
+  pancakeswap: 'PancakeSwap',
+  curve: 'Curve',
+  '1inch': '1inch',
+  robinhood: 'Robinhood',
+}
+
 async function comparePrices(
   input: string,
   onStep: StepCallback
 ): Promise<ComparisonResult | null> {
-  // Echo user input
   onStep({
     id: nextId(),
     type: 'user',
@@ -42,7 +69,6 @@ async function comparePrices(
 
   await sleep(TIMING.parseDelay)
 
-  // Parse
   const trade = parseTradeInput(input)
   if (!trade) {
     onStep({
@@ -55,60 +81,52 @@ async function comparePrices(
     return null
   }
 
-  // System message
   await sleep(TIMING.systemMessageDelay)
   onStep({
     id: nextId(),
     type: 'system',
     status: 'done',
-    message: `Got it. Finding the best price for ${formatTokenAmount(trade.amount, trade.token)}...`,
+    message: `Scanning ${ALL_VENUES.length} venues for ${formatTokenAmount(trade.amount, trade.token)}...`,
     timestamp: Date.now(),
   })
 
-  // Check each venue sequentially for drama
-  const venues: VenueName[] = ['okx', 'binance', '1inch']
   const quotes: VenueQuote[] = []
 
-  for (const venue of venues) {
+  for (const venue of ALL_VENUES) {
     await sleep(TIMING.venueGap)
 
     const stepId = nextId()
 
-    // Show "checking" state
     onStep({
       id: stepId,
       type: 'venue-check',
       status: 'checking',
       venue,
-      message: `Checking ${venueDisplayName(venue)}...`,
+      message: `Checking ${VENUE_DISPLAY[venue]}...`,
       timestamp: Date.now(),
     })
 
-    // Simulate latency
-    const checkTime = randomInRange(TIMING[`${venue === '1inch' ? 'inch' : venue}Check`])
+    const timingKey = TIMING_KEYS[venue]
+    const checkTime = randomInRange(TIMING[timingKey as keyof typeof TIMING] as [number, number])
     await sleep(checkTime)
 
-    // Generate quote
     const quote = generateQuote(venue, trade.token, trade.amount)
     quote.latencyMs = Math.round(checkTime)
     quotes.push(quote)
 
-    // Show result
     onStep({
       id: stepId,
       type: 'venue-check',
       status: 'done',
       venue,
-      message: `${venueDisplayName(venue)}: ${formatCurrency(quote.price)} per ${trade.token}`,
+      message: `${VENUE_DISPLAY[venue]}: ${formatCurrency(quote.price)} per ${trade.token}`,
       data: quote,
       timestamp: Date.now(),
     })
   }
 
-  // Analysis pause
   await sleep(TIMING.analysisDelay)
 
-  // Compare and find best
   const sorted = [...quotes].sort((a, b) => a.total - b.total)
   const best = sorted[0]
   const worst = sorted[sorted.length - 1]
@@ -122,7 +140,6 @@ async function comparePrices(
     savingsPercent,
   }
 
-  // Show comparison
   onStep({
     id: nextId(),
     type: 'comparison',
@@ -132,7 +149,6 @@ async function comparePrices(
     timestamp: Date.now(),
   })
 
-  // Show confirm prompt
   await sleep(TIMING.confirmDelay)
   onStep({
     id: nextId(),
@@ -154,7 +170,7 @@ async function negotiate(input: string, onStep: StepCallback): Promise<void> {
     id: nextId(),
     type: 'system',
     status: 'done',
-    message: `Negotiating with OKX Smart Trading for ${formatTokenAmount(trade.amount, trade.token)}...`,
+    message: `Negotiating with OKX for ${formatTokenAmount(trade.amount, trade.token)}...`,
     timestamp: Date.now(),
   })
 
@@ -205,13 +221,4 @@ async function executeTrade(quote: VenueQuote, onStep: StepCallback): Promise<vo
     data: `Order filled at ${formatCurrency(quote.price)}. Fee: ${formatCurrency(quote.fee)}. Total: ${formatCurrency(quote.total)}. TX: ${txId}`,
     timestamp: Date.now(),
   })
-}
-
-function venueDisplayName(venue: VenueName): string {
-  const names: Record<VenueName, string> = {
-    okx: 'OKX Smart Trading',
-    binance: 'Binance',
-    '1inch': '1inch (DEX)',
-  }
-  return names[venue]
 }

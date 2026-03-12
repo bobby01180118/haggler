@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 interface SettingsState {
-  apiKeys: { okx: string; binance: string; '1inch': string }
+  apiKeys: Record<string, string>
   enabledVenues: string[]
   demoMode: boolean
   setApiKey: (venue: string, key: string) => void
@@ -13,8 +13,16 @@ interface SettingsState {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
-      apiKeys: { okx: '', binance: '', '1inch': '' },
-      enabledVenues: ['okx', 'binance', '1inch'],
+      apiKeys: {
+        binance: '', coinbase: '', okx: '', bybit: '', kraken: '',
+        uniswap: '', jupiter: '', pancakeswap: '', curve: '', '1inch': '',
+        robinhood: '',
+      },
+      enabledVenues: [
+        'binance', 'coinbase', 'okx', 'bybit', 'kraken',
+        'uniswap', 'jupiter', 'pancakeswap', 'curve', '1inch',
+        'robinhood',
+      ],
       demoMode: true,
 
       setApiKey: (venue, key) =>

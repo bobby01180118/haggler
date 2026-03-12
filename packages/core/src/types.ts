@@ -1,6 +1,17 @@
 export type TradeAction = 'buy' | 'sell'
 
-export type VenueName = 'okx' | 'binance' | '1inch'
+export type VenueName =
+  | 'binance'
+  | 'coinbase'
+  | 'okx'
+  | 'bybit'
+  | 'kraken'
+  | 'uniswap'
+  | 'jupiter'
+  | 'pancakeswap'
+  | 'curve'
+  | '1inch'
+  | 'robinhood'
 
 export interface TradeRequest {
   action: TradeAction
