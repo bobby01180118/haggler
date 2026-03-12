@@ -30,14 +30,14 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="py-24 bg-[#081C30]">
+    <section className="py-24 bg-slate-50">
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-white mb-4"
+            className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4"
           >
             How it works
           </motion.h2>
@@ -46,7 +46,7 @@ export default function HowItWorks() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-[#6B8299] text-lg"
+            className="text-slate-400 text-lg"
           >
             Four steps. Under 10 seconds.
           </motion.p>
@@ -62,28 +62,28 @@ export default function HowItWorks() {
               transition={{ delay: i * 0.1 }}
               className="relative group"
             >
-              <div className="bg-[#0D2D4D] rounded-2xl p-6 h-full border border-white/8 hover:border-white/15 transition-all duration-300">
+              <div className="bg-white rounded-2xl p-6 h-full border border-slate-100 shadow-sm hover:shadow-md hover:border-slate-200 transition-all duration-300">
                 {/* Step number */}
-                <div className="text-6xl font-bold text-white/5 absolute top-4 right-4">
+                <div className="text-6xl font-bold text-slate-100 absolute top-4 right-4">
                   {i + 1}
                 </div>
 
                 <div className="relative">
                   <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
-                    style={{ background: `${step.accent}18` }}
+                    style={{ background: `${step.accent}12` }}
                   >
                     <step.icon className="w-6 h-6" style={{ color: step.accent }} />
                   </div>
 
-                  <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
-                  <p className="text-sm text-[#A3B8CC] leading-relaxed">{step.description}</p>
+                  <h3 className="text-base font-semibold text-slate-900 mb-2">{step.title}</h3>
+                  <p className="text-sm text-slate-500 leading-relaxed">{step.description}</p>
                 </div>
               </div>
 
               {/* Connector line */}
               {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 text-white/20 z-10">
+                <div className="hidden lg:block absolute top-1/2 -right-3 w-6 text-slate-300 z-10">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>

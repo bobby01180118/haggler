@@ -28,12 +28,12 @@ export default function ExecuteConfirm({ step }: Props) {
     >
       <div className="w-7 h-7" />
 
-      <div className="bg-[#0D2D4D] border border-[#635BFF]/30 rounded-2xl px-4 py-3 max-w-[85%] ">
-        <p className="text-sm text-white mb-3">
-          Best deal: <span className="text-[#635BFF] font-semibold">{best.venueName}</span> at{' '}
+      <div className="bg-white border border-indigo-200 rounded-2xl px-4 py-3 max-w-[85%] ">
+        <p className="text-sm text-slate-800 mb-3">
+          Best deal: <span className="text-indigo-600 font-semibold">{best.venueName}</span> at{' '}
           <span className="font-mono font-semibold">{formatCurrency(best.price)}</span>.
           {savings > 0 && (
-            <span className="text-[#00D4AA]"> Save {formatCurrency(savings)}.</span>
+            <span className="text-emerald-600"> Save {formatCurrency(savings)}.</span>
           )}
         </p>
 
@@ -41,14 +41,14 @@ export default function ExecuteConfirm({ step }: Props) {
           <button
             onClick={handleExecute}
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-4 py-2 bg-[#635BFF] hover:bg-[#5851ea] text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-slate-800 text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
           >
             <CheckCircle className="w-3.5 h-3.5" />
             Execute Trade
           </button>
           <button
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-4 py-2 bg-white/8 hover:bg-white/10 text-[#A3B8CC] text-sm rounded-lg transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm rounded-lg transition-colors disabled:opacity-50"
           >
             <X className="w-3.5 h-3.5" />
             Cancel

@@ -24,12 +24,12 @@ const DEMO_SCRIPT: DemoLine[] = [
 const LOOP_DELAY = 14000
 
 const venueColor: Record<string, string> = {
-  okx: 'text-white',
-  binance: 'text-yellow-400',
-  coinbase: 'text-blue-400',
-  uniswap: 'text-pink-400',
-  jupiter: 'text-emerald-400',
-  robinhood: 'text-green-400',
+  okx: 'text-slate-900',
+  binance: 'text-yellow-600',
+  coinbase: 'text-blue-600',
+  uniswap: 'text-pink-600',
+  jupiter: 'text-emerald-600',
+  robinhood: 'text-green-600',
 }
 
 export default function DemoPreview() {
@@ -87,27 +87,27 @@ export default function DemoPreview() {
         >
           <div className="relative">
             {/* Shadow glow */}
-            <div className="absolute -inset-4 bg-[#635BFF]/10 rounded-3xl blur-2xl" />
+            <div className="absolute -inset-4 bg-indigo-500/5 rounded-3xl blur-2xl" />
 
-            <div className="relative rounded-2xl border border-white/10 bg-[#0D2D4D] overflow-hidden shadow-2xl shadow-black/30">
+            <div className="relative rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xl">
               {/* Title bar */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-[#081C30] border-b border-white/8">
+              <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-200">
                 <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-white/10 hover:bg-red-400 transition-colors" />
-                  <div className="w-3 h-3 rounded-full bg-white/10 hover:bg-yellow-400 transition-colors" />
-                  <div className="w-3 h-3 rounded-full bg-white/10 hover:bg-green-400 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-red-400 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-yellow-400 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-green-400 transition-colors" />
                 </div>
-                <span className="text-xs text-[#6B8299] ml-2 font-mono">haggler</span>
+                <span className="text-xs text-slate-400 ml-2 font-mono">haggler</span>
               </div>
 
               {/* Terminal content */}
               <div className="p-5 font-mono text-sm min-h-[320px] space-y-2">
                 {/* User input line */}
                 <div className="flex items-center gap-2">
-                  <span className="text-[#635BFF] select-none">{'>'}</span>
-                  <span className="text-white">{typingText}</span>
+                  <span className="text-indigo-500 select-none">{'>'}</span>
+                  <span className="text-slate-800">{typingText}</span>
                   {isTyping && (
-                    <span className="w-2 h-5 bg-[#635BFF] animate-pulse" />
+                    <span className="w-2 h-5 bg-indigo-500 animate-pulse" />
                   )}
                 </div>
 
@@ -122,22 +122,22 @@ export default function DemoPreview() {
                       className="pl-4"
                     >
                       {line.type === 'system' && (
-                        <span className="text-[#6B8299]">{line.text}</span>
+                        <span className="text-slate-400">{line.text}</span>
                       )}
                       {line.type === 'venue' && (
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-2">
-                            <span className="text-[#00D4AA]">✓</span>
-                            <span className={venueColor[line.venue ?? ''] ?? 'text-[#A3B8CC]'}>
+                            <span className="text-emerald-500">✓</span>
+                            <span className={venueColor[line.venue ?? ''] ?? 'text-slate-600'}>
                               {line.text}
                             </span>
                           </span>
-                          <span className="text-white font-semibold tabular-nums">{line.price}</span>
+                          <span className="text-slate-800 font-semibold tabular-nums">{line.price}</span>
                         </div>
                       )}
                       {line.type === 'result' && (
-                        <div className="mt-3 px-4 py-3 rounded-xl bg-[#635BFF]/10 border border-[#635BFF]/20">
-                          <span className="text-[#635BFF] font-medium">{line.text}</span>
+                        <div className="mt-3 px-4 py-3 rounded-xl bg-indigo-50 border border-indigo-100">
+                          <span className="text-indigo-700 font-medium">{line.text}</span>
                         </div>
                       )}
                     </motion.div>

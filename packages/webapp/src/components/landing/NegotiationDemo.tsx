@@ -111,10 +111,10 @@ export default function NegotiationDemo() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
             Watch your agent negotiate
           </h2>
-          <p className="text-[#A3B8CC] text-lg max-w-2xl mx-auto">
+          <p className="text-slate-500 text-lg max-w-2xl mx-auto">
             Your agent haggles with OKX while simultaneously scanning every other venue for leverage
           </p>
         </motion.div>
@@ -123,10 +123,10 @@ export default function NegotiationDemo() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
 
           {/* LEFT: Negotiation Chat */}
-          <div className="lg:col-span-5 surface-card p-4 min-h-[420px] flex flex-col">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/8">
-              <div className="w-2 h-2 rounded-full bg-[#00D4AA] pulse-glow" />
-              <span className="text-xs font-medium text-[#A3B8CC] uppercase tracking-wider">
+          <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-100 shadow-sm p-4 min-h-[420px] flex flex-col">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+              <div className="w-2 h-2 rounded-full bg-emerald-500 pulse-glow" />
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
                 Agent ↔ OKX Negotiation
               </span>
             </div>
@@ -144,8 +144,8 @@ export default function NegotiationDemo() {
                     <div
                       className={`max-w-[85%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed ${
                         msg.role === 'agent'
-                          ? 'bg-[#635BFF]/20 text-[#B4AFFF] rounded-br-md'
-                          : 'bg-white/8 text-[#A3B8CC] rounded-bl-md'
+                          ? 'bg-indigo-50 text-indigo-800 rounded-br-md'
+                          : 'bg-slate-50 text-slate-700 rounded-bl-md'
                       }`}
                     >
                       <span className="text-[10px] font-medium uppercase tracking-wider opacity-60 block mb-1">
@@ -164,19 +164,19 @@ export default function NegotiationDemo() {
                   animate={{ opacity: 1 }}
                   className="flex items-center gap-1 px-3 py-2"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '0ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '150ms' }} />
-                  <span className="w-1.5 h-1.5 rounded-full bg-white/20 animate-bounce" style={{ animationDelay: '300ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '0ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '150ms' }} />
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 animate-bounce" style={{ animationDelay: '300ms' }} />
                 </motion.div>
               )}
             </div>
           </div>
 
           {/* CENTER: Price Scanner */}
-          <div className="lg:col-span-4 surface-card p-4 min-h-[420px] flex flex-col">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/8">
-              <div className={`w-2 h-2 rounded-full ${venues < VENUE_SCAN_SCRIPT.length ? 'bg-[#0073E6] animate-pulse' : 'bg-[#00D4AA]'}`} />
-              <span className="text-xs font-medium text-[#A3B8CC] uppercase tracking-wider">
+          <div className="lg:col-span-4 bg-white rounded-2xl border border-slate-100 shadow-sm p-4 min-h-[420px] flex flex-col">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+              <div className={`w-2 h-2 rounded-full ${venues < VENUE_SCAN_SCRIPT.length ? 'bg-blue-500 animate-pulse' : 'bg-emerald-500'}`} />
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
                 Live Price Scan {venues > 0 && `(${venues}/${VENUE_SCAN_SCRIPT.length})`}
               </span>
             </div>
@@ -191,24 +191,24 @@ export default function NegotiationDemo() {
                     transition={{ duration: 0.3 }}
                     className={`flex items-center justify-between px-3 py-2 rounded-lg transition-colors ${
                       v.priceNum === lowestScanPrice
-                        ? 'bg-[#00D4AA]/10 border border-[#00D4AA]/20'
-                        : 'bg-white/3 hover:bg-white/5'
+                        ? 'bg-emerald-50 border border-emerald-200'
+                        : 'bg-slate-50 hover:bg-slate-100'
                     }`}
                   >
                     <div className="flex items-center gap-2.5">
                       <div
                         className="w-7 h-7 rounded-md flex items-center justify-center text-[10px] font-bold"
-                        style={{ background: `${v.color}20`, color: v.color }}
+                        style={{ background: `${v.color}15`, color: v.color }}
                       >
                         {v.venue[0]}
                       </div>
                       <div>
-                        <span className="text-sm text-white font-medium">{v.venue}</span>
-                        <span className="text-[10px] text-[#6B8299] ml-1.5">{v.tag}</span>
+                        <span className="text-sm text-slate-800 font-medium">{v.venue}</span>
+                        <span className="text-[10px] text-slate-400 ml-1.5">{v.tag}</span>
                       </div>
                     </div>
                     <span className={`text-sm font-mono font-semibold tabular-nums ${
-                      v.priceNum === lowestScanPrice ? 'text-[#00D4AA]' : 'text-[#A3B8CC]'
+                      v.priceNum === lowestScanPrice ? 'text-emerald-600' : 'text-slate-600'
                     }`}>
                       {v.price}
                     </span>
@@ -221,9 +221,9 @@ export default function NegotiationDemo() {
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="flex items-center gap-2 px-3 py-2 text-[#6B8299]"
+                  className="flex items-center gap-2 px-3 py-2 text-slate-400"
                 >
-                  <div className="w-4 h-4 border-2 border-[#0073E6]/30 border-t-[#0073E6] rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-blue-200 border-t-blue-500 rounded-full animate-spin" />
                   <span className="text-xs">Scanning...</span>
                 </motion.div>
               )}
@@ -231,10 +231,10 @@ export default function NegotiationDemo() {
           </div>
 
           {/* RIGHT: Result */}
-          <div className="lg:col-span-3 surface-card p-4 min-h-[420px] flex flex-col">
-            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-white/8">
-              <div className={`w-2 h-2 rounded-full ${showResult ? 'bg-[#00D4AA]' : 'bg-white/20'}`} />
-              <span className="text-xs font-medium text-[#A3B8CC] uppercase tracking-wider">
+          <div className="lg:col-span-3 bg-white rounded-2xl border border-slate-100 shadow-sm p-4 min-h-[420px] flex flex-col">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-slate-100">
+              <div className={`w-2 h-2 rounded-full ${showResult ? 'bg-emerald-500' : 'bg-slate-300'}`} />
+              <span className="text-xs font-medium text-slate-400 uppercase tracking-wider">
                 Best Deal
               </span>
             </div>
@@ -250,26 +250,26 @@ export default function NegotiationDemo() {
                     className="text-center space-y-5"
                   >
                     <div>
-                      <div className="text-xs text-[#6B8299] uppercase tracking-wider mb-1">Negotiated Price</div>
-                      <div className="text-3xl font-bold text-[#00D4AA] font-mono">${BEST_PRICE.toLocaleString()}</div>
-                      <div className="text-xs text-[#6B8299] mt-1">via OKX</div>
+                      <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Negotiated Price</div>
+                      <div className="text-3xl font-bold text-emerald-600 font-mono">${BEST_PRICE.toLocaleString()}</div>
+                      <div className="text-xs text-slate-400 mt-1">via OKX</div>
                     </div>
 
-                    <div className="w-full h-px bg-white/8" />
+                    <div className="w-full h-px bg-slate-100" />
 
                     <div>
-                      <div className="text-xs text-[#6B8299] uppercase tracking-wider mb-1">Market Average</div>
-                      <div className="text-lg text-[#A3B8CC] font-mono line-through">${MARKET_AVG.toLocaleString()}</div>
+                      <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Market Average</div>
+                      <div className="text-lg text-slate-400 font-mono line-through">${MARKET_AVG.toLocaleString()}</div>
                     </div>
 
-                    <div className="px-4 py-3 rounded-xl bg-[#00D4AA]/10 border border-[#00D4AA]/20">
-                      <div className="text-lg font-bold text-[#00D4AA]">
+                    <div className="px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                      <div className="text-lg font-bold text-emerald-700">
                         Saved ${SAVINGS}
                       </div>
-                      <div className="text-xs text-[#00D4AA]/70">{SAVINGS_PCT} better than market</div>
+                      <div className="text-xs text-emerald-600/70">{SAVINGS_PCT} better than market</div>
                     </div>
 
-                    <div className="text-[11px] text-[#6B8299] leading-relaxed">
+                    <div className="text-[11px] text-slate-400 leading-relaxed">
                       Better than all {VENUE_SCAN_SCRIPT.length} scanned venues
                     </div>
                   </motion.div>
@@ -281,8 +281,8 @@ export default function NegotiationDemo() {
                     exit={{ opacity: 0 }}
                     className="text-center space-y-3"
                   >
-                    <div className="w-10 h-10 border-2 border-white/10 border-t-[#635BFF] rounded-full animate-spin mx-auto" />
-                    <div className="text-sm text-[#6B8299]">Analyzing...</div>
+                    <div className="w-10 h-10 border-2 border-slate-200 border-t-indigo-500 rounded-full animate-spin mx-auto" />
+                    <div className="text-sm text-slate-400">Analyzing...</div>
                   </motion.div>
                 )}
               </AnimatePresence>

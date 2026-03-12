@@ -5,13 +5,13 @@ export default function Navbar() {
   const location = useLocation()
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/8 bg-[#0A2540]/80 backdrop-blur-xl">
+    <nav className="fixed top-0 left-0 right-0 z-50 border-b border-slate-200/80 bg-white/80 backdrop-blur-xl">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2.5 text-lg font-semibold">
-          <div className="w-8 h-8 rounded-lg bg-[#635BFF] flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center">
             <Zap className="w-4 h-4 text-white" />
           </div>
-          <span className="text-white">Haggler</span>
+          <span className="text-slate-900">Haggler</span>
         </Link>
 
         <div className="flex items-center gap-1">
@@ -19,8 +19,8 @@ export default function Navbar() {
             to="/trade"
             className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
               location.pathname === '/trade'
-                ? 'bg-[#635BFF]/15 text-[#635BFF]'
-                : 'text-[#A3B8CC] hover:text-white hover:bg-white/5'
+                ? 'bg-indigo-50 text-indigo-600'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
             Trade
@@ -29,8 +29,8 @@ export default function Navbar() {
             to="/settings"
             className={`p-2.5 rounded-full transition-all duration-200 ${
               location.pathname === '/settings'
-                ? 'text-[#635BFF] bg-[#635BFF]/15'
-                : 'text-[#6B8299] hover:text-white hover:bg-white/5'
+                ? 'text-indigo-600 bg-indigo-50'
+                : 'text-slate-400 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
             <Settings className="w-4 h-4" />
