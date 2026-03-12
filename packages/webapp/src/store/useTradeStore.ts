@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import type { AgentStep, ComparisonResult, VenueQuote } from '@haggler/core'
 import { createHaggler } from '@haggler/core'
-import { useSettingsStore } from './useSettingsStore'
+import { useSettingsStore, getOKXCredentials } from './useSettingsStore'
 
 interface TradeState {
   steps: AgentStep[]
@@ -16,7 +16,8 @@ interface TradeState {
 
 function getEngine() {
   const demoMode = useSettingsStore.getState().demoMode
-  return createHaggler({ demoMode })
+  const okxCredentials = getOKXCredentials()
+  return createHaggler({ demoMode, okxCredentials })
 }
 
 export const useTradeStore = create<TradeState>((set, get) => ({

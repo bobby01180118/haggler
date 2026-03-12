@@ -58,3 +58,17 @@ export {
   type QuoteRequest,
   type LiveQuoteResult,
 } from './api/index.js'
+
+// OKX authenticated trading
+export { type OKXCredentials } from './api/okx-auth.js'
+export {
+  okxGetBalance,
+  okxPlaceOrder,
+  okxGetOrder,
+  okxCancelOrder,
+  getOKXInstId,
+} from './api/okx.js'
+export { type OrderParams, type OrderResult, type BalanceDetail } from './api/types.js'
+
+// Negotiation
+export { negotiateOKX } from './negotiator.js'

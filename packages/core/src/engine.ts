@@ -7,9 +7,10 @@ import type {
   VenueName,
   LiveVenueName,
 } from './types.js'
+import type { OKXCredentials } from './api/okx-auth.js'
 import { parseTradeInput } from './parser.js'
 import { generateQuote, ALL_VENUES, LIVE_VENUES, HAGGLER_FEE_RATE } from './venues.js'
-import { simulateNegotiation } from './negotiator.js'
+import { simulateNegotiation, negotiateOKX } from './negotiator.js'
 import { TIMING, randomInRange, sleep } from './delays.js'
 import { formatCurrency, formatTokenAmount } from './formatters.js'
 import { fetchLiveQuote } from './api/index.js'
@@ -21,6 +22,7 @@ function nextId(): string {
 
 export interface HagglerEngineOptions {
   demoMode?: boolean
+  okxCredentials?: OKXCredentials | null
 }
 
 export interface HagglerEngine {
@@ -31,11 +33,12 @@ export interface HagglerEngine {
 
 export function createHaggler(options: HagglerEngineOptions = {}): HagglerEngine {
   const demoMode = options.demoMode ?? true
+  const okxCreds = options.okxCredentials ?? null
 
   return {
     comparePrices: (input, onStep) => comparePrices(input, onStep, demoMode),
-    negotiate,
-    executeTrade,
+    negotiate: (input, onStep) => negotiate(input, onStep, okxCreds),
+    executeTrade: (quote, onStep) => executeTrade(quote, onStep, okxCreds),
   }
 }
 
@@ -210,7 +213,7 @@ async function comparePrices(
   return comparison
 }
 
-async function negotiate(input: string, onStep: StepCallback): Promise<void> {
+async function negotiate(input: string, onStep: StepCallback, okxCreds: OKXCredentials | null): Promise<void> {
   const trade = parseTradeInput(input)
   if (!trade) return
 
@@ -218,22 +221,35 @@ async function negotiate(input: string, onStep: StepCallback): Promise<void> {
     id: nextId(),
     type: 'system',
     status: 'done',
-    message: `Negotiating with exchanges for ${formatTokenAmount(trade.amount, trade.token)}...`,
+    message: `Negotiating with OKX for ${formatTokenAmount(trade.amount, trade.token)}...`,
     timestamp: Date.now(),
   })
 
-  const transcript = simulateNegotiation(trade.token, trade.amount)
+  let transcript
 
-  for (const step of transcript.steps) {
-    await sleep(randomInRange(TIMING.negotiationStepDelay))
-    onStep({
-      id: nextId(),
-      type: 'negotiation',
-      status: 'done',
-      venue: 'okx',
-      message: step.message,
-      timestamp: Date.now(),
-    })
+  if (okxCreds) {
+    // Real negotiation via OKX API
+    transcript = await negotiateOKX(
+      okxCreds,
+      trade.token,
+      trade.amount,
+      trade.action ?? 'buy',
+      onStep,
+    )
+  } else {
+    // Simulated negotiation
+    transcript = simulateNegotiation(trade.token, trade.amount)
+    for (const step of transcript.steps) {
+      await sleep(randomInRange(TIMING.negotiationStepDelay))
+      onStep({
+        id: nextId(),
+        type: 'negotiation',
+        status: 'done',
+        venue: 'okx',
+        message: step.message,
+        timestamp: Date.now(),
+      })
+    }
   }
 
   await sleep(TIMING.analysisDelay)
@@ -247,7 +263,7 @@ async function negotiate(input: string, onStep: StepCallback): Promise<void> {
   })
 }
 
-async function executeTrade(quote: VenueQuote, onStep: StepCallback): Promise<void> {
+async function executeTrade(quote: VenueQuote, onStep: StepCallback, okxCreds: OKXCredentials | null): Promise<void> {
   onStep({
     id: nextId(),
     type: 'system',
@@ -256,6 +272,42 @@ async function executeTrade(quote: VenueQuote, onStep: StepCallback): Promise<vo
     timestamp: Date.now(),
   })
 
+  if (okxCreds && quote.venue === 'okx') {
+    // Real execution via OKX negotiate-and-execute flow
+    try {
+      const transcript = await negotiateOKX(
+        okxCreds,
+        'ETH', // TODO: pass actual token from trade context
+        1,     // TODO: pass actual amount
+        'buy', // TODO: pass actual side
+        onStep,
+      )
+
+      onStep({
+        id: nextId(),
+        type: 'result',
+        status: 'done',
+        venue: quote.venue,
+        message: `Trade executed on ${quote.venueName}`,
+        data: `Order filled at ${formatCurrency(transcript.finalPrice)}. Saved ${formatCurrency(transcript.saved)} via negotiation.`,
+        timestamp: Date.now(),
+      })
+      return
+    } catch (err) {
+      const errMsg = err instanceof Error ? err.message : 'Unknown error'
+      onStep({
+        id: nextId(),
+        type: 'result',
+        status: 'error',
+        venue: quote.venue,
+        message: `Trade failed: ${errMsg}`,
+        timestamp: Date.now(),
+      })
+      return
+    }
+  }
+
+  // Simulated execution (no credentials or non-OKX venue)
   await sleep(TIMING.executeDelay)
 
   const txId = 'tx_' + Math.random().toString(36).substring(2, 10)

@@ -1,5 +1,7 @@
 import type { VenueQuote } from '../types.js'
-import type { QuoteRequest, VenueAPI } from './types.js'
+import type { QuoteRequest, VenueAPI, OrderParams, OrderResult, BalanceDetail } from './types.js'
+import type { OKXCredentials } from './okx-auth.js'
+import { okxAuthFetch } from './okx-auth.js'
 import { OKX_SYMBOLS } from '../tokens.js'
 import { VENUE_CONFIGS } from '../venues.js'
 
@@ -121,4 +123,79 @@ export const okxAPI: VenueAPI = {
       negotiated: config.negotiated,
     }
   },
+}
+
+// =============================================
+// Authenticated OKX Trading API
+// =============================================
+
+/** Get the current best ask/bid price for a symbol (public, no auth needed) */
+export { getTickerPrice as okxGetTickerPrice }
+
+/** Get OKX symbol for a token */
+export function getOKXInstId(token: string): string | undefined {
+  return OKX_SYMBOLS[token]
+}
+
+/** Check account balance */
+export async function okxGetBalance(
+  credentials: OKXCredentials,
+  ccy?: string
+): Promise<BalanceDetail[]> {
+  const path = ccy
+    ? `/api/v5/account/balance?ccy=${ccy}`
+    : '/api/v5/account/balance'
+
+  const res = await okxAuthFetch(credentials, 'GET', path) as {
+    data: Array<{ details: BalanceDetail[] }>
+  }
+
+  return res.data?.[0]?.details ?? []
+}
+
+/** Place an order on OKX */
+export async function okxPlaceOrder(
+  credentials: OKXCredentials,
+  params: OrderParams
+): Promise<{ ordId: string; clOrdId: string }> {
+  const res = await okxAuthFetch(credentials, 'POST', '/api/v5/trade/order', params as unknown as Record<string, unknown>) as {
+    data: Array<{ ordId: string; clOrdId: string; sCode: string; sMsg: string }>
+  }
+
+  const order = res.data?.[0]
+  if (!order || order.sCode !== '0') {
+    throw new Error(`OKX order failed: ${order?.sMsg || 'unknown error'}`)
+  }
+
+  return { ordId: order.ordId, clOrdId: order.clOrdId }
+}
+
+/** Get order status */
+export async function okxGetOrder(
+  credentials: OKXCredentials,
+  instId: string,
+  clOrdId: string
+): Promise<OrderResult> {
+  const path = `/api/v5/trade/order?instId=${instId}&clOrdId=${clOrdId}`
+  const res = await okxAuthFetch(credentials, 'GET', path) as {
+    data: OrderResult[]
+  }
+
+  if (!res.data?.[0]) {
+    throw new Error('OKX order not found')
+  }
+
+  return res.data[0]
+}
+
+/** Cancel an order */
+export async function okxCancelOrder(
+  credentials: OKXCredentials,
+  instId: string,
+  clOrdId: string
+): Promise<void> {
+  await okxAuthFetch(credentials, 'POST', '/api/v5/trade/cancel-order', {
+    instId,
+    clOrdId,
+  })
 }
