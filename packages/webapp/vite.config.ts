@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
-      '@arbiter/core': new URL('../core/src', import.meta.url).pathname,
+      '@haggler/core': new URL('../core/src', import.meta.url).pathname,
     },
   },
 })

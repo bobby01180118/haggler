@@ -17,13 +17,13 @@ function nextId(): string {
   return `step-${++stepCounter}`
 }
 
-export interface ArbiterEngine {
+export interface HagglerEngine {
   comparePrices(input: string, onStep: StepCallback): Promise<ComparisonResult | null>
   negotiate(input: string, onStep: StepCallback): Promise<void>
   executeTrade(quote: VenueQuote, onStep: StepCallback): Promise<void>
 }
 
-export function createArbiter(): ArbiterEngine {
+export function createHaggler(): HagglerEngine {
   return { comparePrices, negotiate, executeTrade }
 }
 
@@ -170,7 +170,7 @@ async function negotiate(input: string, onStep: StepCallback): Promise<void> {
     id: nextId(),
     type: 'system',
     status: 'done',
-    message: `Negotiating with OKX for ${formatTokenAmount(trade.amount, trade.token)}...`,
+    message: `Negotiating with exchanges for ${formatTokenAmount(trade.amount, trade.token)}...`,
     timestamp: Date.now(),
   })
 

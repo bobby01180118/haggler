@@ -1,4 +1,4 @@
-# Arbiter — Project Context for Claude Code
+# Haggler — Project Context for Claude Code
 
 ## What We're Building
 

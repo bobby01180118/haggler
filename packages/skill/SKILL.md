@@ -1,12 +1,12 @@
 ---
-name: Arbiter
+name: Haggler
 description: AI agent that negotiates crypto trades across OKX, Binance, and DEXs to find you the best price.
 version: 0.1.0
-author: Arbiter
+author: Haggler
 tags: [crypto, trading, defi, okx, binance, negotiation]
 ---
 
-# Arbiter
+# Haggler
 
 Your AI agent that negotiates crypto trades across multiple venues.
 
@@ -18,7 +18,7 @@ Your AI agent that negotiates crypto trades across multiple venues.
 
 ## Usage
 
-Ask Arbiter to find you the best price:
+Ask Haggler to find you the best price:
 
 - "Compare prices for 1 ETH"
 - "Buy 0.5 BTC at the best price"

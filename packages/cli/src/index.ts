@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import * as readline from 'node:readline'
-import { createArbiter, parseTradeInput, SUPPORTED_TOKENS, formatCurrency, type AgentStep } from '@arbiter/core'
+import { createHaggler, parseTradeInput, SUPPORTED_TOKENS, formatCurrency, type AgentStep } from '@haggler/core'
 
-const engine = createArbiter()
+const engine = createHaggler()
 
 const RESET = '\x1b[0m'
 const BOLD = '\x1b[1m'
@@ -69,14 +69,14 @@ function printStep(step: AgentStep) {
 }
 
 async function main() {
-  console.log(`\n${GREEN}${BOLD}  Arbiter${RESET} — Your AI that negotiates crypto trades`)
+  console.log(`\n${GREEN}${BOLD}  Haggler${RESET} — Your AI that negotiates crypto trades`)
   console.log(`${GRAY}  Supported tokens: ${SUPPORTED_TOKENS.join(', ')}`)
   console.log(`  Type "buy 1 ETH" or "quit" to exit${RESET}\n`)
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
-    prompt: `${GREEN}arbiter>${RESET} `,
+    prompt: `${GREEN}haggler>${RESET} `,
   })
 
   rl.prompt()

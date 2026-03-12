@@ -13,8 +13,8 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #fff;
-  color: #0a2540;
+  background: #0A2540;
+  color: #ffffff;
 }
 
 ::-webkit-scrollbar {
@@ -24,18 +24,11 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d4d4d8;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 3px;
 }
 
-/* Stripe-inspired gradient mesh on light bg */
-@keyframes gradient-shift {
-  0%, 100% { transform: translate(0%, 0%) scale(1); }
-  25% { transform: translate(5%, -3%) scale(1.05); }
-  50% { transform: translate(-3%, 5%) scale(0.95); }
-  75% { transform: translate(-5%, -5%) scale(1.02); }
-}
-
+/* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #635bff 0%, #0073e6 40%, #00d4aa 100%);
   -webkit-background-clip: text;
@@ -43,12 +36,32 @@ body {
   background-clip: text;
 }
 
-/* Stripe-style hero mesh */
+/* Stripe-style hero mesh on dark bg */
+@keyframes gradient-shift {
+  0%, 100% { transform: translate(0%, 0%) scale(1); }
+  25% { transform: translate(5%, -3%) scale(1.05); }
+  50% { transform: translate(-3%, 5%) scale(0.95); }
+  75% { transform: translate(-5%, -5%) scale(1.02); }
+}
+
 .stripe-mesh {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 91, 255, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(0, 115, 230, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 50% at 10% 80%, rgba(0, 212, 170, 0.06) 0%, transparent 50%);
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 91, 255, 0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(0, 115, 230, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 50% at 10% 80%, rgba(0, 212, 170, 0.10) 0%, transparent 50%);
+}
+
+/* Surface cards */
+.surface-card {
+  background: #0D2D4D;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+}
+
+.surface-elevated {
+  background: #112E4E;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1rem;
 }
 
 /* Negotiation chat animation */
@@ -73,4 +86,34 @@ body {
 
 .logo-scroll:hover {
   animation-play-state: paused;
+}
+
+/* Pulse glow for live indicators */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0, 212, 170, 0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 8px 4px rgba(0, 212, 170, 0.2); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Fade in for results */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+/* Price scan animation */
+@keyframes scan-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.scan-in {
+  animation: scan-in 0.35s ease-out forwards;
 }

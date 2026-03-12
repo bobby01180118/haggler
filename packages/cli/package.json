@@ -1,5 +1,5 @@
 {
-  "name": "@arbiter/cli",
+  "name": "@haggler/cli",
   "version": "0.1.0",
   "type": "module",
   "bin": {
@@ -11,7 +11,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@arbiter/core": "*",
+    "@haggler/core": "*",
     "chalk": "^5.3.0"
   },
   "devDependencies": {

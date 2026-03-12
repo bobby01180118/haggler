@@ -5,14 +5,14 @@ import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js'
-import { createArbiter, generateAllQuotes, parseTradeInput, SUPPORTED_TOKENS, BASE_PRICES, formatCurrency } from '@arbiter/core'
+import { createHaggler, generateAllQuotes, parseTradeInput, SUPPORTED_TOKENS, BASE_PRICES, formatCurrency } from '@haggler/core'
 
 const server = new Server(
-  { name: 'arbiter', version: '0.1.0' },
+  { name: 'haggler', version: '0.1.0' },
   { capabilities: { tools: {} } }
 )
 
-const engine = createArbiter()
+const engine = createHaggler()
 
 // List tools
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
@@ -146,7 +146,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport()
   await server.connect(transport)
-  console.error('Arbiter MCP server running on stdio')
+  console.error('Haggler MCP server running on stdio')
 }
 
 main().catch(console.error)

@@ -1,5 +1,5 @@
 {
-  "name": "@arbiter/mcp-server",
+  "name": "@haggler/mcp-server",
   "version": "0.1.0",
   "type": "module",
   "bin": {
@@ -11,7 +11,7 @@
     "dev": "tsc --watch"
   },
   "dependencies": {
-    "@arbiter/core": "*",
+    "@haggler/core": "*",
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "devDependencies": {

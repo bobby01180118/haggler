@@ -1,4 +1,4 @@
-# Arbiter — MVP PRD
+# Haggler — MVP PRD
 
 ## One-liner
 
@@ -8,7 +8,7 @@ Your AI agent that negotiates crypto trades across venues.
 
 ## Two Deliverables
 
-### 1. The Product (Arbiter Agent)
+### 1. The Product (Haggler Agent)
 
 A TypeScript agent that negotiates/compares crypto prices across multiple venues and picks the best deal.
 
@@ -56,7 +56,7 @@ A TypeScript agent that negotiates/compares crypto prices across multiple venues
 
 ### 2. The Website (arbiter.xyz or similar)
 
-A clean webapp that lets users try Arbiter in the browser.
+A clean webapp that lets users try Haggler in the browser.
 
 #### Pages
 

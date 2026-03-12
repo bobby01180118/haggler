@@ -39,6 +39,6 @@ export const useSettingsStore = create<SettingsState>()(
 
       setDemoMode: (enabled) => set({ demoMode: enabled }),
     }),
-    { name: 'arbiter-settings' }
+    { name: 'haggler-settings' }
   )
 )

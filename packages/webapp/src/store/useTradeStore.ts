@@ -1,6 +1,6 @@
 import { create } from 'zustand'
-import type { AgentStep, ComparisonResult, VenueQuote } from '@arbiter/core'
-import { createArbiter } from '@arbiter/core'
+import type { AgentStep, ComparisonResult, VenueQuote } from '@haggler/core'
+import { createHaggler } from '@haggler/core'
 
 interface TradeState {
   steps: AgentStep[]
@@ -13,7 +13,7 @@ interface TradeState {
   reset: () => void
 }
 
-const engine = createArbiter()
+const engine = createHaggler()
 
 export const useTradeStore = create<TradeState>((set, get) => ({
   steps: [],

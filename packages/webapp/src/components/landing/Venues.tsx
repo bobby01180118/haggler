@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 const venues = [
   // Top 5 CEX
   { name: 'Binance', tag: 'CEX', color: '#F0B90B', icon: 'B' },
-  { name: 'OKX', tag: 'CEX', color: '#000000', icon: 'O' },
+  { name: 'OKX', tag: 'CEX', color: '#FFFFFF', icon: 'O' },
   { name: 'Coinbase', tag: 'CEX', color: '#0052FF', icon: 'C' },
   { name: 'Bybit', tag: 'CEX', color: '#F7A600', icon: 'By' },
   { name: 'Kraken', tag: 'CEX', color: '#7B61FF', icon: 'K' },
@@ -25,7 +25,7 @@ export default function Venues() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-sm text-slate-400 uppercase tracking-widest font-medium mb-12"
+          className="text-center text-sm text-[#6B8299] uppercase tracking-widest font-medium mb-12"
         >
           Connected Venues
         </motion.p>
@@ -38,20 +38,20 @@ export default function Venues() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              className="group flex flex-col items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all duration-300"
+              className="group flex flex-col items-center gap-3 p-4 rounded-2xl bg-[#0D2D4D] border border-white/8 hover:border-white/15 transition-all duration-300"
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-transform group-hover:scale-110"
                 style={{
-                  background: `${v.color}12`,
+                  background: `${v.color}15`,
                   color: v.color,
                 }}
               >
                 {v.icon}
               </div>
               <div className="text-center">
-                <span className="text-xs font-medium text-slate-700 block">{v.name}</span>
-                <span className="text-[10px] text-slate-400">{v.tag}</span>
+                <span className="text-xs font-medium text-white/80 block">{v.name}</span>
+                <span className="text-[10px] text-[#6B8299]">{v.tag}</span>
               </div>
             </motion.div>
           ))}

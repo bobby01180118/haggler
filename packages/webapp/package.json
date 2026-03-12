@@ -1,5 +1,5 @@
 {
-  "name": "@arbiter/webapp",
+  "name": "@haggler/webapp",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@arbiter/core": "*",
+    "@haggler/core": "*",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.460.0",
     "react": "^19.0.0",

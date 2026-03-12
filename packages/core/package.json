@@ -1,5 +1,5 @@
 {
-  "name": "@arbiter/core",
+  "name": "@haggler/core",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
