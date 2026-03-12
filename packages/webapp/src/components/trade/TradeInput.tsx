@@ -34,7 +34,7 @@ export default function TradeInput() {
   }
 
   return (
-    <div className="border-t border-zinc-800 bg-zinc-950 p-4">
+    <div className="border-t border-slate-200 bg-white p-4">
       <div className="max-w-3xl mx-auto">
         {/* Suggestion chips */}
         <div className="flex gap-2 mb-3 flex-wrap">
@@ -43,7 +43,7 @@ export default function TradeInput() {
               key={s}
               onClick={() => handleSuggestion(s)}
               disabled={isRunning}
-              className="px-3 py-1 text-xs rounded-full border border-zinc-700 text-zinc-400 hover:text-zinc-50 hover:border-zinc-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-3 py-1 text-xs rounded-full border border-slate-200 text-slate-500 hover:text-slate-900 hover:border-slate-300 hover:bg-slate-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {s}
             </button>
@@ -62,12 +62,12 @@ export default function TradeInput() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Buy 1 ETH at the best price"
             disabled={isRunning}
-            className="flex-1 bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-3 text-sm text-zinc-50 placeholder-zinc-500 outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/20 transition-colors disabled:opacity-50"
+            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400/20 transition-colors disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={isRunning || !input.trim()}
-            className="px-4 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="w-4 h-4" />
           </button>

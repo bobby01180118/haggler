@@ -26,14 +26,14 @@ export default function ExecuteConfirm({ step }: Props) {
       animate={{ opacity: 1, y: 0 }}
       className="flex items-start gap-2"
     >
-      <div className="w-7 h-7" /> {/* Spacer to align with messages */}
+      <div className="w-7 h-7" />
 
-      <div className="bg-zinc-800/50 border border-emerald-500/30 rounded-2xl px-4 py-3 max-w-[85%]">
-        <p className="text-sm text-zinc-50 mb-3">
-          Best deal: <span className="text-emerald-400 font-semibold">{best.venueName}</span> at{' '}
+      <div className="bg-white border border-indigo-200 rounded-2xl px-4 py-3 max-w-[85%] shadow-sm">
+        <p className="text-sm text-slate-800 mb-3">
+          Best deal: <span className="text-indigo-600 font-semibold">{best.venueName}</span> at{' '}
           <span className="font-mono font-semibold">{formatCurrency(best.price)}</span>.
           {savings > 0 && (
-            <span className="text-emerald-400"> Save {formatCurrency(savings)}.</span>
+            <span className="text-emerald-600"> Save {formatCurrency(savings)}.</span>
           )}
         </p>
 
@@ -41,14 +41,14 @@ export default function ExecuteConfirm({ step }: Props) {
           <button
             onClick={handleExecute}
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
           >
             <CheckCircle className="w-3.5 h-3.5" />
             Execute Trade
           </button>
           <button
             disabled={isRunning}
-            className="flex items-center gap-1.5 px-4 py-2 bg-zinc-700 hover:bg-zinc-600 text-zinc-300 text-sm rounded-lg transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 text-sm rounded-lg transition-colors disabled:opacity-50"
           >
             <X className="w-3.5 h-3.5" />
             Cancel

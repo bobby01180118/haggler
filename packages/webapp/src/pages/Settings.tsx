@@ -6,27 +6,27 @@ const VENUE_GROUPS = [
   {
     label: 'Centralized Exchanges',
     venues: [
-      { id: 'binance', name: 'Binance', color: 'text-yellow-400' },
-      { id: 'coinbase', name: 'Coinbase', color: 'text-blue-400' },
-      { id: 'okx', name: 'OKX', color: 'text-white' },
-      { id: 'bybit', name: 'Bybit', color: 'text-amber-400' },
-      { id: 'kraken', name: 'Kraken', color: 'text-violet-400' },
+      { id: 'binance', name: 'Binance', color: 'text-yellow-600' },
+      { id: 'coinbase', name: 'Coinbase', color: 'text-blue-600' },
+      { id: 'okx', name: 'OKX', color: 'text-slate-900' },
+      { id: 'bybit', name: 'Bybit', color: 'text-amber-600' },
+      { id: 'kraken', name: 'Kraken', color: 'text-violet-600' },
     ],
   },
   {
     label: 'DEX Aggregators',
     venues: [
-      { id: 'uniswap', name: 'Uniswap', color: 'text-pink-400' },
-      { id: 'jupiter', name: 'Jupiter', color: 'text-emerald-400' },
-      { id: 'pancakeswap', name: 'PancakeSwap', color: 'text-orange-400' },
-      { id: 'curve', name: 'Curve', color: 'text-red-400' },
-      { id: '1inch', name: '1inch', color: 'text-slate-300' },
+      { id: 'uniswap', name: 'Uniswap', color: 'text-pink-600' },
+      { id: 'jupiter', name: 'Jupiter', color: 'text-emerald-600' },
+      { id: 'pancakeswap', name: 'PancakeSwap', color: 'text-orange-600' },
+      { id: 'curve', name: 'Curve', color: 'text-red-600' },
+      { id: '1inch', name: '1inch', color: 'text-slate-600' },
     ],
   },
   {
     label: 'Brokers',
     venues: [
-      { id: 'robinhood', name: 'Robinhood', color: 'text-green-400' },
+      { id: 'robinhood', name: 'Robinhood', color: 'text-green-600' },
     ],
   },
 ]
@@ -39,22 +39,22 @@ export default function Settings() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-2xl font-bold text-white mb-8">Settings</h1>
+      <h1 className="text-2xl font-bold text-slate-900 mb-8">Settings</h1>
 
       {/* Demo Mode */}
-      <div className="glass-card rounded-2xl p-6 mb-6">
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6 shadow-sm">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-base font-semibold text-white mb-1">Demo Mode</h2>
-            <p className="text-sm text-zinc-500">Uses simulated data. No API keys required.</p>
+            <h2 className="text-base font-semibold text-slate-900 mb-1">Demo Mode</h2>
+            <p className="text-sm text-slate-500">Uses simulated data. No API keys required.</p>
           </div>
           <button
             onClick={() => setDemoMode(!demoMode)}
             className={`relative w-12 h-6 rounded-full transition-colors ${
-              demoMode ? 'bg-emerald-600' : 'bg-zinc-700'
+              demoMode ? 'bg-indigo-600' : 'bg-slate-200'
             }`}
           >
-            <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white transition-transform ${
+            <div className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
               demoMode ? 'translate-x-6' : 'translate-x-0.5'
             }`} />
           </button>
@@ -62,11 +62,11 @@ export default function Settings() {
       </div>
 
       {/* API Keys */}
-      <div className="glass-card rounded-2xl p-6 mb-6">
-        <h2 className="text-base font-semibold text-white mb-1">API Keys</h2>
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6 shadow-sm">
+        <h2 className="text-base font-semibold text-slate-900 mb-1">API Keys</h2>
         <div className="flex items-center gap-1.5 mb-6">
-          <Shield className="w-3.5 h-3.5 text-emerald-500" />
-          <p className="text-xs text-zinc-500">Stored locally in your browser. Never sent to any server.</p>
+          <Shield className="w-3.5 h-3.5 text-emerald-600" />
+          <p className="text-xs text-slate-500">Stored locally in your browser. Never sent to any server.</p>
         </div>
 
         <div className="space-y-4">
@@ -81,11 +81,11 @@ export default function Settings() {
                   value={apiKeys[v.id] ?? ''}
                   onChange={(e) => setApiKey(v.id, e.target.value)}
                   placeholder={`${v.name} API key`}
-                  className="w-full bg-zinc-800/50 border border-zinc-700/50 rounded-xl px-3 py-2.5 text-sm text-zinc-50 placeholder-zinc-600 outline-none focus:border-emerald-500/50 font-mono transition-colors"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-sm text-slate-900 placeholder-slate-400 outline-none focus:border-indigo-400 font-mono transition-colors"
                 />
                 <button
                   onClick={() => setShowKeys((s) => ({ ...s, [v.id]: !s[v.id] }))}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                 >
                   {showKeys[v.id] ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -96,12 +96,12 @@ export default function Settings() {
       </div>
 
       {/* Venue Selection */}
-      <div className="glass-card rounded-2xl p-6">
-        <h2 className="text-base font-semibold text-white mb-6">Enabled Venues</h2>
+      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+        <h2 className="text-base font-semibold text-slate-900 mb-6">Enabled Venues</h2>
         <div className="space-y-6">
           {VENUE_GROUPS.map((group) => (
             <div key={group.label}>
-              <p className="text-xs text-zinc-500 uppercase tracking-wider font-medium mb-3">{group.label}</p>
+              <p className="text-xs text-slate-400 uppercase tracking-wider font-medium mb-3">{group.label}</p>
               <div className="space-y-2.5">
                 {group.venues.map((v) => (
                   <label key={v.id} className="flex items-center gap-3 cursor-pointer group">
@@ -109,9 +109,9 @@ export default function Settings() {
                       type="checkbox"
                       checked={enabledVenues.includes(v.id)}
                       onChange={() => toggleVenue(v.id)}
-                      className="w-4 h-4 rounded border-zinc-600 bg-zinc-800 text-emerald-500 focus:ring-emerald-500/20"
+                      className="w-4 h-4 rounded border-slate-300 bg-white text-indigo-600 focus:ring-indigo-400/20"
                     />
-                    <span className={`text-sm ${v.color} group-hover:brightness-125 transition-all`}>
+                    <span className={`text-sm ${v.color} group-hover:opacity-80 transition-all`}>
                       {v.name}
                     </span>
                   </label>

@@ -11,26 +11,25 @@ interface DemoLine {
 
 const DEMO_SCRIPT: DemoLine[] = [
   { type: 'user', text: 'Buy 1 ETH best price', delay: 0 },
-  { type: 'system', text: 'Scanning 11 venues for 1 ETH...', delay: 800 },
-  { type: 'venue', text: 'OKX', venue: 'okx', price: '$3,421.50', delay: 1600 },
-  { type: 'venue', text: 'Binance', venue: 'binance', price: '$3,435.20', delay: 2200 },
+  { type: 'system', text: 'Negotiating across 11 venues...', delay: 800 },
+  { type: 'venue', text: 'OKX — negotiated via Smart Trade API', venue: 'okx', price: '$3,421.50', delay: 1600 },
+  { type: 'venue', text: 'Binance — maker rebate applied', venue: 'binance', price: '$3,435.20', delay: 2200 },
   { type: 'venue', text: 'Coinbase', venue: 'coinbase', price: '$3,441.80', delay: 2800 },
-  { type: 'venue', text: 'Uniswap', venue: 'uniswap', price: '$3,429.00', delay: 3400 },
+  { type: 'venue', text: 'Uniswap — optimal route found', venue: 'uniswap', price: '$3,429.00', delay: 3400 },
   { type: 'venue', text: 'Jupiter', venue: 'jupiter', price: '$3,426.10', delay: 4000 },
-  { type: 'venue', text: 'Robinhood', venue: 'robinhood', price: '$3,452.30', delay: 4600 },
-  { type: 'system', text: '+5 more venues checked', delay: 5200 },
-  { type: 'result', text: 'Best: OKX at $3,421.50 — Save $30.80 vs Robinhood', delay: 6000 },
+  { type: 'system', text: '+6 more venues negotiated', delay: 4600 },
+  { type: 'result', text: 'Negotiated: OKX at $3,421.50 — Saved $30.80 (0.9%)', delay: 5400 },
 ]
 
 const LOOP_DELAY = 14000
 
 const venueColor: Record<string, string> = {
-  okx: 'text-white',
-  binance: 'text-yellow-400',
-  coinbase: 'text-blue-400',
-  uniswap: 'text-pink-400',
-  jupiter: 'text-emerald-400',
-  robinhood: 'text-green-400',
+  okx: 'text-slate-900',
+  binance: 'text-yellow-600',
+  coinbase: 'text-blue-600',
+  uniswap: 'text-pink-600',
+  jupiter: 'text-emerald-600',
+  robinhood: 'text-green-600',
 }
 
 export default function DemoPreview() {
@@ -86,30 +85,29 @@ export default function DemoPreview() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          {/* Terminal window with glow */}
           <div className="relative">
-            {/* Glow effect behind terminal */}
-            <div className="absolute -inset-4 bg-emerald-500/5 rounded-3xl blur-2xl" />
+            {/* Shadow glow */}
+            <div className="absolute -inset-4 bg-indigo-500/5 rounded-3xl blur-2xl" />
 
-            <div className="relative rounded-2xl border border-zinc-700/50 bg-zinc-900 overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl border border-slate-200 bg-white overflow-hidden shadow-xl">
               {/* Title bar */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-zinc-800/80 border-b border-zinc-700/50">
+              <div className="flex items-center gap-2 px-4 py-3 bg-slate-50 border-b border-slate-200">
                 <div className="flex gap-1.5">
-                  <div className="w-3 h-3 rounded-full bg-zinc-600 hover:bg-red-500/70 transition-colors" />
-                  <div className="w-3 h-3 rounded-full bg-zinc-600 hover:bg-yellow-500/70 transition-colors" />
-                  <div className="w-3 h-3 rounded-full bg-zinc-600 hover:bg-green-500/70 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-red-400 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-yellow-400 transition-colors" />
+                  <div className="w-3 h-3 rounded-full bg-slate-200 hover:bg-green-400 transition-colors" />
                 </div>
-                <span className="text-xs text-zinc-500 ml-2 font-mono">arbiter</span>
+                <span className="text-xs text-slate-400 ml-2 font-mono">arbiter</span>
               </div>
 
               {/* Terminal content */}
               <div className="p-5 font-mono text-sm min-h-[320px] space-y-2">
                 {/* User input line */}
                 <div className="flex items-center gap-2">
-                  <span className="text-emerald-500 select-none">{'>'}</span>
-                  <span className="text-zinc-50">{typingText}</span>
+                  <span className="text-indigo-500 select-none">{'>'}</span>
+                  <span className="text-slate-800">{typingText}</span>
                   {isTyping && (
-                    <span className="w-2 h-5 bg-emerald-500 animate-pulse" />
+                    <span className="w-2 h-5 bg-indigo-500 animate-pulse" />
                   )}
                 </div>
 
@@ -124,22 +122,22 @@ export default function DemoPreview() {
                       className="pl-4"
                     >
                       {line.type === 'system' && (
-                        <span className="text-zinc-500">{line.text}</span>
+                        <span className="text-slate-400">{line.text}</span>
                       )}
                       {line.type === 'venue' && (
                         <div className="flex items-center justify-between">
                           <span className="flex items-center gap-2">
                             <span className="text-emerald-500">✓</span>
-                            <span className={venueColor[line.venue ?? ''] ?? 'text-zinc-300'}>
+                            <span className={venueColor[line.venue ?? ''] ?? 'text-slate-600'}>
                               {line.text}
                             </span>
                           </span>
-                          <span className="text-zinc-50 font-semibold tabular-nums">{line.price}</span>
+                          <span className="text-slate-800 font-semibold tabular-nums">{line.price}</span>
                         </div>
                       )}
                       {line.type === 'result' && (
-                        <div className="mt-3 px-4 py-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                          <span className="text-emerald-400 font-medium">{line.text}</span>
+                        <div className="mt-3 px-4 py-3 rounded-xl bg-indigo-50 border border-indigo-100">
+                          <span className="text-indigo-700 font-medium">{line.text}</span>
                         </div>
                       )}
                     </motion.div>
