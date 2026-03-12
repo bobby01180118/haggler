@@ -1,0 +1,13 @@
+{
+  "name": "arbiter",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w packages/webapp",
+    "build": "npm run build -w packages/core && npm run build -w packages/mcp-server && npm run build -w packages/cli && npm run build -w packages/webapp",
+    "build:core": "npm run build -w packages/core",
+    "build:webapp": "npm run build -w packages/webapp"
+  }
+}

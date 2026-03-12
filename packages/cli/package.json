@@ -1,0 +1,21 @@
+{
+  "name": "@arbiter/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "arbiter": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@arbiter/core": "*",
+    "chalk": "^5.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.4.0",
+    "typescript": "^5.7.0"
+  }
+}
