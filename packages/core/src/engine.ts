@@ -5,16 +5,22 @@ import type {
   ComparisonResult,
   VenueQuote,
   VenueName,
+  LiveVenueName,
 } from './types.js'
 import { parseTradeInput } from './parser.js'
-import { generateQuote, ALL_VENUES } from './venues.js'
+import { generateQuote, ALL_VENUES, LIVE_VENUES, HAGGLER_FEE_RATE } from './venues.js'
 import { simulateNegotiation } from './negotiator.js'
 import { TIMING, randomInRange, sleep } from './delays.js'
 import { formatCurrency, formatTokenAmount } from './formatters.js'
+import { fetchLiveQuote } from './api/index.js'
 
 let stepCounter = 0
 function nextId(): string {
   return `step-${++stepCounter}`
+}
+
+export interface HagglerEngineOptions {
+  demoMode?: boolean
 }
 
 export interface HagglerEngine {
@@ -23,8 +29,14 @@ export interface HagglerEngine {
   executeTrade(quote: VenueQuote, onStep: StepCallback): Promise<void>
 }
 
-export function createHaggler(): HagglerEngine {
-  return { comparePrices, negotiate, executeTrade }
+export function createHaggler(options: HagglerEngineOptions = {}): HagglerEngine {
+  const demoMode = options.demoMode ?? true
+
+  return {
+    comparePrices: (input, onStep) => comparePrices(input, onStep, demoMode),
+    negotiate,
+    executeTrade,
+  }
 }
 
 const TIMING_KEYS: Record<VenueName, string> = {
@@ -57,7 +69,8 @@ const VENUE_DISPLAY: Record<VenueName, string> = {
 
 async function comparePrices(
   input: string,
-  onStep: StepCallback
+  onStep: StepCallback,
+  demoMode: boolean = true
 ): Promise<ComparisonResult | null> {
   onStep({
     id: nextId(),
@@ -81,18 +94,24 @@ async function comparePrices(
     return null
   }
 
+  // In live mode, only scan live venues; in demo mode, scan all
+  const venuesToScan = demoMode ? ALL_VENUES : (LIVE_VENUES as VenueName[])
+
   await sleep(TIMING.systemMessageDelay)
   onStep({
     id: nextId(),
     type: 'system',
     status: 'done',
-    message: `Scanning ${ALL_VENUES.length} venues for ${formatTokenAmount(trade.amount, trade.token)}...`,
+    message: demoMode
+      ? `Scanning ${ALL_VENUES.length} venues for ${formatTokenAmount(trade.amount, trade.token)}...`
+      : `Scanning ${venuesToScan.length} live venues for ${formatTokenAmount(trade.amount, trade.token)}...`,
     timestamp: Date.now(),
   })
 
   const quotes: VenueQuote[] = []
+  const quoteExpiry = Date.now() + 30_000 // 30s expiry
 
-  for (const venue of ALL_VENUES) {
+  for (const venue of venuesToScan) {
     await sleep(TIMING.venueGap)
 
     const stepId = nextId()
@@ -106,12 +125,41 @@ async function comparePrices(
       timestamp: Date.now(),
     })
 
-    const timingKey = TIMING_KEYS[venue]
-    const checkTime = randomInRange(TIMING[timingKey as keyof typeof TIMING] as [number, number])
-    await sleep(checkTime)
+    let quote: VenueQuote
+    if (demoMode) {
+      // Simulated quote
+      const timingKey = TIMING_KEYS[venue]
+      const checkTime = randomInRange(TIMING[timingKey as keyof typeof TIMING] as [number, number])
+      await sleep(checkTime)
+      quote = generateQuote(venue, trade.token, trade.amount)
+      quote.latencyMs = Math.round(checkTime)
+    } else {
+      // Real API quote for live venues
+      try {
+        quote = await fetchLiveQuote(venue as LiveVenueName, {
+          base: trade.token,
+          quote: 'USDT',
+          amount: trade.amount,
+          side: trade.action ?? 'buy',
+        })
+      } catch {
+        // API failed — fall back to simulated quote
+        const timingKey = TIMING_KEYS[venue]
+        const checkTime = randomInRange(TIMING[timingKey as keyof typeof TIMING] as [number, number])
+        await sleep(checkTime)
+        quote = generateQuote(venue, trade.token, trade.amount)
+        quote.latencyMs = Math.round(checkTime)
+      }
+    }
 
-    const quote = generateQuote(venue, trade.token, trade.amount)
-    quote.latencyMs = Math.round(checkTime)
+    // Add Haggler fee and expiry to every quote
+    const hagglerFee = parseFloat((quote.price * trade.amount * HAGGLER_FEE_RATE).toFixed(2))
+    quote.fees = {
+      exchange: quote.fee,
+      haggler: hagglerFee,
+      total: parseFloat((quote.fee + hagglerFee).toFixed(2)),
+    }
+    quote.expiresAt = quoteExpiry
     quotes.push(quote)
 
     onStep({

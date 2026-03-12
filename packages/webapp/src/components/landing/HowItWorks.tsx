@@ -16,8 +16,8 @@ const steps = [
   },
   {
     icon: Search,
-    title: 'Compares across 11 venues',
-    description: 'Negotiated quotes from CEXs, DEXs, and brokers — side by side',
+    title: 'Compares across live venues',
+    description: 'Real-time quotes from 3 live venues — with 8 more coming soon',
     accent: '#0073e6',
   },
   {

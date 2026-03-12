@@ -5,9 +5,13 @@ interface SettingsState {
   apiKeys: Record<string, string>
   enabledVenues: string[]
   demoMode: boolean
+  slippageTolerance: number
+  walletAddress: string | null
   setApiKey: (venue: string, key: string) => void
   toggleVenue: (venue: string) => void
   setDemoMode: (enabled: boolean) => void
+  setSlippageTolerance: (v: number) => void
+  setWalletAddress: (addr: string | null) => void
 }
 
 export const useSettingsStore = create<SettingsState>()(
@@ -24,6 +28,8 @@ export const useSettingsStore = create<SettingsState>()(
         'robinhood',
       ],
       demoMode: true,
+      slippageTolerance: 0.005,
+      walletAddress: null,
 
       setApiKey: (venue, key) =>
         set((state) => ({
@@ -38,6 +44,8 @@ export const useSettingsStore = create<SettingsState>()(
         })),
 
       setDemoMode: (enabled) => set({ demoMode: enabled }),
+      setSlippageTolerance: (v) => set({ slippageTolerance: v }),
+      setWalletAddress: (addr) => set({ walletAddress: addr }),
     }),
     { name: 'haggler-settings' }
   )

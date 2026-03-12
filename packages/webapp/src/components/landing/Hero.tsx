@@ -14,7 +14,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-500 text-xs font-medium mb-8 shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          AI-powered negotiation across 11 venues
+          Live on 3 venues — 8 more coming soon
         </motion.div>
 
         {/* Headline */}
@@ -24,9 +24,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]"
         >
-          Your AI trades harder
+          Your AI that negotiates
           <br />
-          <span className="gradient-text">so you don't have to</span>
+          <span className="gradient-text">crypto trades</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -36,8 +36,8 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Haggler negotiates with exchanges, scans every venue,
-          and locks the best price — in seconds.
+          Haggler negotiates with exchanges, compares prices across venues,
+          and locks the best deal — in seconds. Open source and non-custodial.
         </motion.p>
 
         {/* CTAs */}
@@ -75,8 +75,8 @@ export default function Hero() {
             <div className="text-xs sm:text-sm text-slate-400 mt-1">Negotiated savings</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900">11</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Venues scanned</div>
+            <div className="text-2xl sm:text-3xl font-bold text-slate-900">3</div>
+            <div className="text-xs sm:text-sm text-slate-400 mt-1">Live venues</div>
           </div>
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-bold text-slate-900">&lt;10s</div>

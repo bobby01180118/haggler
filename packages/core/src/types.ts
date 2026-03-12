@@ -13,11 +13,24 @@ export type VenueName =
   | '1inch'
   | 'robinhood'
 
+export type LiveVenueName = 'okx' | 'binance' | '1inch'
+
+export type VenueTier = 'live' | 'coming-soon'
+
+export type VenueType = 'cex' | 'dex' | 'broker'
+
 export interface TradeRequest {
   action: TradeAction
   amount: number
   token: string
   quoteToken: string
+}
+
+export interface FeeBreakdown {
+  exchange: number
+  haggler: number
+  gas?: number
+  total: number
 }
 
 export interface VenueQuote {
@@ -28,6 +41,22 @@ export interface VenueQuote {
   total: number
   latencyMs: number
   negotiated: boolean
+  expiresAt?: number
+  fees?: FeeBreakdown
+}
+
+export type TradeStatus = 'pending' | 'submitted' | 'filled' | 'failed' | 'cancelled'
+
+export interface Trade {
+  id: string
+  quoteId: string
+  venue: VenueName
+  request: TradeRequest
+  status: TradeStatus
+  fillPrice: number
+  fees: FeeBreakdown
+  txHash?: string
+  timestamp: number
 }
 
 export type AgentStepType =

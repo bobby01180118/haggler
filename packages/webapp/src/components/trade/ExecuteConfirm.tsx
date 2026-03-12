@@ -1,8 +1,9 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import type { AgentStep, ComparisonResult } from '@haggler/core'
 import { formatCurrency } from '@haggler/core'
 import { useTradeStore } from '../../store/useTradeStore'
-import { CheckCircle, X } from 'lucide-react'
+import { CheckCircle, X, Clock, Info } from 'lucide-react'
 
 interface Props {
   step: AgentStep
@@ -11,12 +12,32 @@ interface Props {
 export default function ExecuteConfirm({ step }: Props) {
   const comparison = step.data as ComparisonResult
   const { executeTrade, isRunning } = useTradeStore()
+  const [secondsLeft, setSecondsLeft] = useState<number | null>(null)
 
-  if (!comparison) return null
-  const { best, savings } = comparison
+  const best = comparison?.best
+  const savings = comparison?.savings ?? 0
+  const fees = best?.fees
+  const expiresAt = best?.expiresAt
+
+  // Countdown timer
+  useEffect(() => {
+    if (!expiresAt) return
+
+    const update = () => {
+      const remaining = Math.max(0, Math.ceil((expiresAt - Date.now()) / 1000))
+      setSecondsLeft(remaining)
+    }
+    update()
+    const interval = setInterval(update, 1000)
+    return () => clearInterval(interval)
+  }, [expiresAt])
+
+  if (!comparison || !best) return null
+
+  const expired = secondsLeft !== null && secondsLeft <= 0
 
   const handleExecute = () => {
-    if (isRunning) return
+    if (isRunning || expired) return
     executeTrade(best)
   }
 
@@ -28,7 +49,7 @@ export default function ExecuteConfirm({ step }: Props) {
     >
       <div className="w-7 h-7" />
 
-      <div className="bg-white border border-indigo-200 rounded-2xl px-4 py-3 max-w-[85%] ">
+      <div className="bg-white border border-indigo-200 rounded-2xl px-4 py-3 max-w-[85%]">
         <p className="text-sm text-slate-800 mb-3">
           Best deal: <span className="text-indigo-600 font-semibold">{best.venueName}</span> at{' '}
           <span className="font-mono font-semibold">{formatCurrency(best.price)}</span>.
@@ -37,14 +58,58 @@ export default function ExecuteConfirm({ step }: Props) {
           )}
         </p>
 
+        {/* Fee breakdown */}
+        {fees && (
+          <div className="mb-3 bg-slate-50 rounded-lg px-3 py-2 text-xs text-slate-600 space-y-1">
+            <div className="flex justify-between">
+              <span>Exchange fee</span>
+              <span className="font-mono">{formatCurrency(fees.exchange)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Haggler fee (0.05%)</span>
+              <span className="font-mono">{formatCurrency(fees.haggler)}</span>
+            </div>
+            {fees.gas !== undefined && (
+              <div className="flex justify-between">
+                <span>Gas (DEX)</span>
+                <span className="font-mono">{formatCurrency(fees.gas)}</span>
+              </div>
+            )}
+            <div className="flex justify-between border-t border-slate-200 pt-1 font-medium text-slate-800">
+              <span>Total fees</span>
+              <span className="font-mono">{formatCurrency(fees.total)}</span>
+            </div>
+          </div>
+        )}
+
+        {/* Quote expiry countdown */}
+        {secondsLeft !== null && (
+          <div className={`flex items-center gap-1.5 text-xs mb-3 ${
+            expired ? 'text-red-500' : secondsLeft <= 10 ? 'text-amber-600' : 'text-slate-400'
+          }`}>
+            <Clock className="w-3 h-3" />
+            {expired ? (
+              <span>Quote expired — request a new one</span>
+            ) : (
+              <span>Quote expires in {secondsLeft}s</span>
+            )}
+          </div>
+        )}
+
+        {/* Info text */}
+        <div className="flex items-start gap-1.5 text-xs text-slate-400 mb-3">
+          <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
+          <span>Looking is free. You only pay when you execute.</span>
+        </div>
+
         <div className="flex gap-2">
           <button
             onClick={handleExecute}
-            disabled={isRunning}
-            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-slate-800 text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+            disabled={isRunning || expired}
+            className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <CheckCircle className="w-3.5 h-3.5" />
-            Execute Trade
+            {expired ? 'Quote Expired' : 'Execute Trade'}
           </button>
           <button
             disabled={isRunning}

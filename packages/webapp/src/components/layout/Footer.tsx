@@ -1,4 +1,4 @@
-import { Zap } from 'lucide-react'
+import { Zap, Github } from 'lucide-react'
 
 export default function Footer() {
   return (
@@ -12,9 +12,21 @@ export default function Footer() {
             <span className="text-sm font-medium text-slate-600">Haggler</span>
           </div>
 
-          <p className="text-sm text-slate-400">
-            Your keys stay local. Never custodial.
-          </p>
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/haggler-ai/haggler"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              <Github className="w-4 h-4" />
+              Open Source
+            </a>
+            <span className="text-slate-200">|</span>
+            <p className="text-sm text-slate-400">
+              Your keys stay local. Never custodial.
+            </p>
+          </div>
 
           <p className="text-sm text-slate-400">
             &copy; 2025 Haggler

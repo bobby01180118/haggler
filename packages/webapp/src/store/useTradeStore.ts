@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import type { AgentStep, ComparisonResult, VenueQuote } from '@haggler/core'
 import { createHaggler } from '@haggler/core'
+import { useSettingsStore } from './useSettingsStore'
 
 interface TradeState {
   steps: AgentStep[]
@@ -13,7 +14,10 @@ interface TradeState {
   reset: () => void
 }
 
-const engine = createHaggler()
+function getEngine() {
+  const demoMode = useSettingsStore.getState().demoMode
+  return createHaggler({ demoMode })
+}
 
 export const useTradeStore = create<TradeState>((set, get) => ({
   steps: [],
@@ -42,6 +46,7 @@ export const useTradeStore = create<TradeState>((set, get) => ({
 
   startTrade: async (input) => {
     set({ isRunning: true, comparison: null })
+    const engine = getEngine()
     const result = await engine.comparePrices(input, (step) => {
       get().addStep(step)
     })
@@ -50,6 +55,7 @@ export const useTradeStore = create<TradeState>((set, get) => ({
 
   executeTrade: async (quote) => {
     set({ isRunning: true })
+    const engine = getEngine()
     await engine.executeTrade(quote, (step) => {
       get().addStep(step)
     })

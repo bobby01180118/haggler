@@ -21,25 +21,18 @@ interface VenueScan {
 const NEGOTIATION_SCRIPT: ChatMsg[] = [
   { role: 'agent', text: 'Requesting 1 ETH quote...', delay: 0 },
   { role: 'exchange', text: 'Market rate: $3,441.80 + 0.10% fee = $3,445.24', delay: 1200 },
-  { role: 'agent', text: 'Scanning 10 other venues for leverage...', delay: 2400 },
-  { role: 'agent', text: 'I see $3,429.00 on Uniswap. Can you match?', delay: 5000 },
-  { role: 'exchange', text: 'Adjusted: $3,432.60 with fee rebate applied', delay: 6200 },
-  { role: 'agent', text: 'Jupiter offers $3,426.10. Final offer?', delay: 7500 },
-  { role: 'exchange', text: 'Best price: $3,421.50 all-in. Deal?', delay: 8800 },
-  { role: 'agent', text: 'Deal locked. Saved $23.74 vs market (0.69%)', delay: 10000 },
+  { role: 'agent', text: 'Scanning Binance and 1inch for leverage...', delay: 2400 },
+  { role: 'agent', text: 'I see $3,435.20 on Binance. Can you match?', delay: 4200 },
+  { role: 'exchange', text: 'Adjusted: $3,432.60 with fee rebate applied', delay: 5400 },
+  { role: 'agent', text: '1inch offers $3,430.50. Final offer?', delay: 6600 },
+  { role: 'exchange', text: 'Best price: $3,421.50 all-in. Deal?', delay: 7800 },
+  { role: 'agent', text: 'Deal locked. Saved $23.74 vs market (0.69%)', delay: 9000 },
 ]
 
 const VENUE_SCAN_SCRIPT: VenueScan[] = [
   { venue: 'Binance', tag: 'CEX', price: '$3,435.20', priceNum: 3435.20, delay: 2800, color: '#F0B90B' },
-  { venue: 'Coinbase', tag: 'CEX', price: '$3,441.80', priceNum: 3441.80, delay: 3200, color: '#0052FF' },
-  { venue: 'Bybit', tag: 'CEX', price: '$3,438.50', priceNum: 3438.50, delay: 3600, color: '#F7A600' },
-  { venue: 'Kraken', tag: 'CEX', price: '$3,440.10', priceNum: 3440.10, delay: 3900, color: '#7B61FF' },
-  { venue: 'Uniswap', tag: 'DEX', price: '$3,429.00', priceNum: 3429.00, delay: 4200, color: '#FF007A' },
-  { venue: 'Jupiter', tag: 'DEX', price: '$3,426.10', priceNum: 3426.10, delay: 4600, color: '#00D18C' },
-  { venue: 'PancakeSwap', tag: 'DEX', price: '$3,433.40', priceNum: 3433.40, delay: 5000, color: '#D1884F' },
-  { venue: 'Curve', tag: 'DEX', price: '$3,431.90', priceNum: 3431.90, delay: 5400, color: '#FF0000' },
-  { venue: '1inch', tag: 'DEX', price: '$3,430.50', priceNum: 3430.50, delay: 5800, color: '#94A3B8' },
-  { venue: 'Robinhood', tag: 'Broker', price: '$3,444.00', priceNum: 3444.00, delay: 6200, color: '#00C805' },
+  { venue: 'OKX', tag: 'CEX', price: '$3,441.80', priceNum: 3441.80, delay: 3400, color: '#000000' },
+  { venue: '1inch', tag: 'DEX', price: '$3,430.50', priceNum: 3430.50, delay: 4000, color: '#1B314F' },
 ]
 
 const BEST_PRICE = 3421.50
@@ -47,7 +40,7 @@ const MARKET_AVG = 3435.05
 const SAVINGS = 23.74
 const SAVINGS_PCT = '0.69%'
 
-const LOOP_DELAY = 16000
+const LOOP_DELAY = 13000
 
 export default function NegotiationDemo() {
   const [chatMsgs, setChatMsgs] = useState<number>(0)
@@ -77,7 +70,7 @@ export default function NegotiationDemo() {
     })
 
     // Show result
-    const resultT = setTimeout(() => setShowResult(true), 10500)
+    const resultT = setTimeout(() => setShowResult(true), 9500)
     timeoutsRef.current.push(resultT)
 
     // Loop

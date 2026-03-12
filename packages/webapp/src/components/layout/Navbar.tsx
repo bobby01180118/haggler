@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Zap, Settings } from 'lucide-react'
+import { Zap, Settings, Clock } from 'lucide-react'
 
 export default function Navbar() {
   const location = useLocation()
@@ -24,6 +24,16 @@ export default function Navbar() {
             }`}
           >
             Trade
+          </Link>
+          <Link
+            to="/history"
+            className={`p-2.5 rounded-full transition-all duration-200 ${
+              location.pathname === '/history'
+                ? 'text-indigo-600 bg-indigo-50'
+                : 'text-slate-400 hover:text-slate-900 hover:bg-slate-50'
+            }`}
+          >
+            <Clock className="w-4 h-4" />
           </Link>
           <Link
             to="/settings"

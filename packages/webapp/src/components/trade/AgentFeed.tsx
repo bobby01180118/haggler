@@ -21,8 +21,7 @@ export default function AgentFeed() {
           Ready to negotiate for you
         </h2>
         <p className="text-sm text-slate-500 max-w-md">
-          Tell me what you want to trade. I'll negotiate across 11 venues including Binance, OKX, Uniswap, and more
-          to haggle the best price — then you decide.
+          I'll check OKX, Binance, and 1inch to find you the best price
         </p>
       </div>
     )

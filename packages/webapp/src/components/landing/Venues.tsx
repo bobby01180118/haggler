@@ -1,19 +1,20 @@
 import { motion } from 'framer-motion'
 
+const LIVE_VENUES = new Set(['Binance', 'OKX', '1inch'])
+
 const venues = [
-  // Top 5 CEX
-  { name: 'Binance', tag: 'CEX', color: '#F0B90B', icon: 'B' },
+  // Live venues first
   { name: 'OKX', tag: 'CEX', color: '#000000', icon: 'O' },
+  { name: 'Binance', tag: 'CEX', color: '#F0B90B', icon: 'B' },
+  { name: '1inch', tag: 'DEX', color: '#1B314F', icon: '1"' },
+  // Coming soon
   { name: 'Coinbase', tag: 'CEX', color: '#0052FF', icon: 'C' },
   { name: 'Bybit', tag: 'CEX', color: '#F7A600', icon: 'By' },
   { name: 'Kraken', tag: 'CEX', color: '#7B61FF', icon: 'K' },
-  // Top 5 DEX
   { name: 'Uniswap', tag: 'DEX', color: '#FF007A', icon: 'U' },
   { name: 'Jupiter', tag: 'DEX', color: '#00D18C', icon: 'J' },
   { name: 'PancakeSwap', tag: 'DEX', color: '#D1884F', icon: 'P' },
   { name: 'Curve', tag: 'DEX', color: '#FF0000', icon: 'Cv' },
-  { name: '1inch', tag: 'DEX', color: '#1B314F', icon: '1"' },
-  // Broker
   { name: 'Robinhood', tag: 'Broker', color: '#00C805', icon: 'R' },
 ]
 
@@ -38,7 +39,11 @@ export default function Venues() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              className="group flex flex-col items-center gap-3 p-4 rounded-2xl bg-white border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all duration-300"
+              className={`group flex flex-col items-center gap-3 p-4 rounded-2xl bg-white border transition-all duration-300 ${
+                LIVE_VENUES.has(v.name)
+                  ? 'border-emerald-200 hover:border-emerald-300 hover:shadow-md'
+                  : 'border-slate-100 hover:border-slate-200 hover:shadow-sm opacity-60'
+              }`}
             >
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center text-sm font-bold transition-transform group-hover:scale-110"
@@ -53,6 +58,15 @@ export default function Venues() {
                 <span className="text-xs font-medium text-slate-700 block">{v.name}</span>
                 <span className="text-[10px] text-slate-400">{v.tag}</span>
               </div>
+              {LIVE_VENUES.has(v.name) ? (
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                  Live
+                </span>
+              ) : (
+                <span className="text-[10px] font-medium uppercase tracking-wider text-slate-400 bg-slate-50 px-2 py-0.5 rounded-full">
+                  Coming Soon
+                </span>
+              )}
             </motion.div>
           ))}
         </div>

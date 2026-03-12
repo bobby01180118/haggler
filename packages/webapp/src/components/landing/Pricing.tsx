@@ -37,7 +37,7 @@ export default function Pricing() {
               <span className="text-4xl font-bold text-slate-900">Free</span>
             </div>
             <p className="text-slate-500 text-sm mb-6 leading-relaxed">
-              Scan all 11 venues, see real-time prices, and find the best deal. No account needed.
+              Real-time price comparison across live venues. Find the best deal instantly. No account needed.
             </p>
             <ul className="space-y-3 mb-8">
               <PricingFeature text="Price comparison across all venues" />

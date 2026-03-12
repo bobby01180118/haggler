@@ -65,8 +65,8 @@ export default function ComparisonTable({ step }: Props) {
                           {quote.venueName}
                         </span>
                         {quote.negotiated && (
-                          <span className="text-[9px] px-1 py-0.5 rounded bg-amber-100 text-amber-700">
-                            API
+                          <span className="text-[9px] px-1 py-0.5 rounded bg-indigo-100 text-indigo-700 font-semibold tracking-wide">
+                            NEGOTIATED
                           </span>
                         )}
                       </div>
@@ -74,8 +74,13 @@ export default function ComparisonTable({ step }: Props) {
                     <td className="px-4 py-2.5 text-right font-mono text-slate-700">
                       {formatCurrency(quote.price)}
                     </td>
-                    <td className="px-4 py-2.5 text-right font-mono text-slate-400 text-xs">
-                      {formatCurrency(quote.fee)}
+                    <td className="px-4 py-2.5 text-right text-xs">
+                      <span className="font-mono text-slate-400">{formatCurrency(quote.fee)}</span>
+                      {quote.fees?.haggler !== undefined && quote.fees.haggler > 0 && (
+                        <div className="font-mono text-slate-300 text-[10px]">
+                          +{formatCurrency(quote.fees.haggler)} haggler
+                        </div>
+                      )}
                     </td>
                     <td className={`px-4 py-2.5 text-right font-mono font-medium ${
                       isBest ? 'text-emerald-600' : 'text-slate-700'

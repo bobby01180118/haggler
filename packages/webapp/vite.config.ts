@@ -9,4 +9,14 @@ export default defineConfig({
       '@haggler/core': new URL('../core/src', import.meta.url).pathname,
     },
   },
+  server: {
+    proxy: {
+      // Proxy 1inch API to avoid CORS issues in development
+      '/api/1inch': {
+        target: 'https://api.1inch.dev',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/1inch/, ''),
+      },
+    },
+  },
 })
