@@ -7,8 +7,10 @@ import { BASE_PRICES } from '../tokens.js'
 const TIMEOUT_MS = 8_000
 
 // 1inch Fusion API (no auth needed for quotes)
-// Fallback: use token price estimation from known sources
-const ONEINCH_QUOTE_URL = 'https://api.1inch.dev/swap/v6.0/1/quote'
+// Use proxy in browser (Vite dev server), direct URL in Node.js
+const ONEINCH_QUOTE_URL = typeof window !== 'undefined'
+  ? '/api/1inch/swap/v6.0/1/quote'
+  : 'https://api.1inch.dev/swap/v6.0/1/quote'
 
 // Token decimals for common tokens
 const TOKEN_DECIMALS: Record<string, number> = {
@@ -91,8 +93,18 @@ export const oneinchAPI: VenueAPI = {
       const dstAmount = Number(quoteResult.dstAmount) / (10 ** usdtDecimals)
       price = dstAmount / request.amount
     } else {
-      // Fallback: use base price with DEX spread simulation
-      const basePrice = BASE_PRICES[request.base] ?? 100
+      // Fallback: try to get live price from Binance public data API, then add DEX spread
+      let basePrice = BASE_PRICES[request.base] ?? 100
+      try {
+        const symbol = `${request.base}USDT`
+        const res = await fetchWithTimeout(`https://data-api.binance.vision/api/v3/ticker/price?symbol=${symbol}`, 3000)
+        if (res.ok) {
+          const data = await res.json()
+          basePrice = parseFloat(data.price)
+        }
+      } catch {
+        // Use static fallback price
+      }
       const spread = config.spreadRange[0] + Math.random() * (config.spreadRange[1] - config.spreadRange[0])
       price = basePrice * (1 + spread)
     }

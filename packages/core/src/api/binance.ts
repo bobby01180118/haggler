@@ -3,7 +3,9 @@ import type { QuoteRequest, VenueAPI } from './types.js'
 import { BINANCE_SYMBOLS } from '../tokens.js'
 import { VENUE_CONFIGS } from '../venues.js'
 
-const BASE_URL = 'https://api.binance.com'
+// data-api.binance.vision is Binance's public data API (no geo-restrictions, no CORS issues)
+// Falls back to api.binance.com via proxy if needed
+const BASE_URL = 'https://data-api.binance.vision'
 const TIMEOUT_MS = 5_000
 
 interface BinanceTickerResponse {

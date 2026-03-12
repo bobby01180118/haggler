@@ -11,11 +11,21 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // Proxy 1inch API to avoid CORS issues in development
+      // Proxy exchange APIs to avoid CORS issues in development
       '/api/1inch': {
         target: 'https://api.1inch.dev',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api\/1inch/, ''),
+      },
+      '/api/binance': {
+        target: 'https://api.binance.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/binance/, ''),
+      },
+      '/api/okx': {
+        target: 'https://www.okx.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api\/okx/, ''),
       },
     },
   },

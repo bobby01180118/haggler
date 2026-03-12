@@ -3,7 +3,8 @@ import type { QuoteRequest, VenueAPI } from './types.js'
 import { OKX_SYMBOLS } from '../tokens.js'
 import { VENUE_CONFIGS } from '../venues.js'
 
-const BASE_URL = 'https://www.okx.com'
+// Use proxy in browser (Vite dev server), direct URL in Node.js
+const BASE_URL = typeof window !== 'undefined' ? '/api/okx' : 'https://www.okx.com'
 const TIMEOUT_MS = 5_000
 
 interface OKXTickerResponse {
