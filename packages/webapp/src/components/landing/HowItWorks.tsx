@@ -4,26 +4,26 @@ import { motion } from 'framer-motion'
 const steps = [
   {
     icon: MessageSquare,
-    title: 'Describe your trade',
-    description: '"Buy 1 ETH" — plain English, no forms or dropdowns',
+    title: 'Tell us what you want',
+    description: '"Buy 1 ETH" — just type, no forms',
     accent: '#635bff',
   },
   {
     icon: Zap,
-    title: 'Agent negotiates for you',
-    description: 'Connects to exchange APIs and haggles — finding optimal routes, fee rebates, and the best pairs',
+    title: 'We find the best price',
+    description: 'Scans OKX, Binance, and 1inch — and negotiates for lower fees',
     accent: '#00d4aa',
   },
   {
     icon: Search,
-    title: 'Compares across live venues',
-    description: 'Real-time quotes from 3 live venues — with 8 more coming soon',
+    title: 'Compare side by side',
+    description: "See every exchange's price, fees, and total — instantly",
     accent: '#0073e6',
   },
   {
     icon: CheckCircle,
-    title: 'Execute the best deal',
-    description: 'One click to trade at the price your agent negotiated',
+    title: 'One click to execute',
+    description: "Trade at the best price found. You're always in control.",
     accent: '#635bff',
   },
 ]

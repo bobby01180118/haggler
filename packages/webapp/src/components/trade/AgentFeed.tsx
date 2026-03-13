@@ -3,13 +3,22 @@ import { useTradeStore } from '../../store/useTradeStore'
 import AgentMessage from './AgentMessage'
 import { Bot } from 'lucide-react'
 
+const QUICK_SUGGESTIONS = ['Buy 1 ETH', 'Buy 0.5 BTC', 'Buy 100 SOL']
+
 export default function AgentFeed() {
   const steps = useTradeStore((s) => s.steps)
+  const { startTrade, isRunning, reset } = useTradeStore()
   const bottomRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [steps.length])
+
+  const handleSuggestion = async (text: string) => {
+    if (isRunning) return
+    reset()
+    await startTrade(text)
+  }
 
   if (steps.length === 0) {
     return (
@@ -18,11 +27,22 @@ export default function AgentFeed() {
           <Bot className="w-8 h-8 text-indigo-600" />
         </div>
         <h2 className="text-xl font-semibold text-slate-900 mb-2">
-          Ready to negotiate for you
+          What do you want to trade?
         </h2>
-        <p className="text-sm text-slate-500 max-w-md">
-          I'll check OKX, Binance, and 1inch to find you the best price
+        <p className="text-sm text-slate-500 max-w-md mb-6">
+          Type something like "Buy 1 ETH" or tap a suggestion below
         </p>
+        <div className="flex flex-wrap gap-2 justify-center">
+          {QUICK_SUGGESTIONS.map((s) => (
+            <button
+              key={s}
+              onClick={() => handleSuggestion(s)}
+              className="px-4 py-2 text-sm rounded-full border border-indigo-200 text-indigo-600 hover:bg-indigo-50 hover:border-indigo-300 transition-colors"
+            >
+              {s}
+            </button>
+          ))}
+        </div>
       </div>
     )
   }

@@ -163,7 +163,7 @@ export default function Settings() {
       {/* Coming Soon */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm opacity-60">
         <h2 className="text-base font-semibold text-slate-900 mb-1">Coming Soon</h2>
-        <p className="text-xs text-slate-500 mb-5">These venues are on the roadmap.</p>
+        <p className="text-xs text-slate-500 mb-5">These exchanges are on the roadmap.</p>
         <div className="space-y-3">
           {['Coinbase', 'Bybit', 'Kraken', 'Uniswap', 'Jupiter', 'PancakeSwap', 'Curve', 'Robinhood'].map((name) => (
             <div key={name} className="flex items-center justify-between py-2 px-3 rounded-xl bg-slate-50">

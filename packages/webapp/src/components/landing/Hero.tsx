@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown } from 'lucide-react'
+import { ArrowRight, ChevronDown, Github, ShieldCheck, UserX } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export default function Hero() {
@@ -14,7 +14,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-500 text-xs font-medium mb-8 shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Live on 3 venues — 8 more coming soon
+          Live on OKX, Binance, 1inch
         </motion.div>
 
         {/* Headline */}
@@ -24,9 +24,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]"
         >
-          Your AI that negotiates
+          Stop overpaying
           <br />
-          <span className="gradient-text">crypto trades</span>
+          <span className="gradient-text">for crypto</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -36,8 +36,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Haggler negotiates with exchanges, compares prices across venues,
-          and locks the best deal — in seconds. Open source and non-custodial.
+          Haggler scans OKX, Binance, and 1inch — negotiates better rates — and saves you 0.5–1.5% per trade.
         </motion.p>
 
         {/* CTAs */}
@@ -51,16 +50,37 @@ export default function Hero() {
             to="/trade"
             className="group flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full transition-all duration-200 text-base shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40"
           >
-            Start Trading
+            Try it free
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <a
             href="#demo"
             className="flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-medium rounded-full transition-all duration-200 text-base border border-slate-200 hover:border-slate-300 shadow-sm"
           >
-            See How It Works
+            See how it works
             <ChevronDown className="w-4 h-4" />
           </a>
+        </motion.div>
+
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="flex items-center justify-center gap-6 sm:gap-8 mt-10 text-xs text-slate-400"
+        >
+          <span className="flex items-center gap-1.5">
+            <Github className="w-3.5 h-3.5" />
+            Open source
+          </span>
+          <span className="flex items-center gap-1.5">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Keys never leave your device
+          </span>
+          <span className="flex items-center gap-1.5">
+            <UserX className="w-3.5 h-3.5" />
+            No account required
+          </span>
         </motion.div>
 
         {/* Stats row */}
@@ -68,15 +88,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex items-center justify-center gap-8 sm:gap-16 mt-16 pt-8 border-t border-slate-200/60"
+          className="flex items-center justify-center gap-8 sm:gap-16 mt-12 pt-8 border-t border-slate-200/60"
         >
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-bold text-slate-900">0.5–1.5%</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Negotiated savings</div>
+            <div className="text-xs sm:text-sm text-slate-400 mt-1">Average savings</div>
           </div>
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-bold text-slate-900">3</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Live venues</div>
+            <div className="text-xs sm:text-sm text-slate-400 mt-1">Live exchanges</div>
           </div>
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-bold text-slate-900">&lt;10s</div>

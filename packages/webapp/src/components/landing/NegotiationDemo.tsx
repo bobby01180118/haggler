@@ -20,25 +20,25 @@ interface VenueScan {
 
 const NEGOTIATION_SCRIPT: ChatMsg[] = [
   { role: 'agent', text: 'Requesting 1 ETH quote...', delay: 0 },
-  { role: 'exchange', text: 'Market rate: $3,441.80 + 0.10% fee = $3,445.24', delay: 1200 },
+  { role: 'exchange', text: 'Market rate: $1,912.40 + 0.10% fee = $1,914.31', delay: 1200 },
   { role: 'agent', text: 'Scanning Binance and 1inch for leverage...', delay: 2400 },
-  { role: 'agent', text: 'I see $3,435.20 on Binance. Can you match?', delay: 4200 },
-  { role: 'exchange', text: 'Adjusted: $3,432.60 with fee rebate applied', delay: 5400 },
-  { role: 'agent', text: '1inch offers $3,430.50. Final offer?', delay: 6600 },
-  { role: 'exchange', text: 'Best price: $3,421.50 all-in. Deal?', delay: 7800 },
-  { role: 'agent', text: 'Deal locked. Saved $23.74 vs market (0.69%)', delay: 9000 },
+  { role: 'agent', text: 'I see $1,908.60 on Binance. Can you match?', delay: 4200 },
+  { role: 'exchange', text: 'Adjusted: $1,906.80 with fee rebate applied', delay: 5400 },
+  { role: 'agent', text: '1inch offers $1,905.20. Final offer?', delay: 6600 },
+  { role: 'exchange', text: 'Best price: $1,899.50 all-in. Deal?', delay: 7800 },
+  { role: 'agent', text: 'Deal locked. Saved $12.90 vs market (0.67%)', delay: 9000 },
 ]
 
 const VENUE_SCAN_SCRIPT: VenueScan[] = [
-  { venue: 'Binance', tag: 'CEX', price: '$3,435.20', priceNum: 3435.20, delay: 2800, color: '#F0B90B' },
-  { venue: 'OKX', tag: 'CEX', price: '$3,441.80', priceNum: 3441.80, delay: 3400, color: '#000000' },
-  { venue: '1inch', tag: 'DEX', price: '$3,430.50', priceNum: 3430.50, delay: 4000, color: '#1B314F' },
+  { venue: 'Binance', tag: 'CEX', price: '$1,908.60', priceNum: 1908.60, delay: 2800, color: '#F0B90B' },
+  { venue: 'OKX', tag: 'CEX', price: '$1,912.40', priceNum: 1912.40, delay: 3400, color: '#000000' },
+  { venue: '1inch', tag: 'DEX', price: '$1,905.20', priceNum: 1905.20, delay: 4000, color: '#1B314F' },
 ]
 
-const BEST_PRICE = 3421.50
-const MARKET_AVG = 3435.05
-const SAVINGS = 23.74
-const SAVINGS_PCT = '0.69%'
+const BEST_PRICE = 1899.50
+const MARKET_AVG = 1908.73
+const SAVINGS = 12.90
+const SAVINGS_PCT = '0.67%'
 
 const LOOP_DELAY = 13000
 
@@ -108,7 +108,7 @@ export default function NegotiationDemo() {
             Watch your agent negotiate
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Your agent haggles with OKX while simultaneously scanning every other venue for leverage
+            Your agent haggles with OKX while simultaneously scanning every other exchange for leverage
           </p>
         </motion.div>
 
@@ -263,7 +263,7 @@ export default function NegotiationDemo() {
                     </div>
 
                     <div className="text-[11px] text-slate-400 leading-relaxed">
-                      Better than all {VENUE_SCAN_SCRIPT.length} scanned venues
+                      Better than all {VENUE_SCAN_SCRIPT.length} scanned exchanges
                     </div>
                   </motion.div>
                 ) : (

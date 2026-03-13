@@ -11,11 +11,11 @@ interface DemoLine {
 
 const DEMO_SCRIPT: DemoLine[] = [
   { type: 'user', text: 'Buy 1 ETH best price', delay: 0 },
-  { type: 'system', text: 'Negotiating across 3 live venues...', delay: 800 },
-  { type: 'venue', text: 'OKX — negotiated via API', venue: 'okx', price: '$3,421.50', delay: 1600 },
-  { type: 'venue', text: 'Binance — maker rebate applied', venue: 'binance', price: '$3,435.20', delay: 2200 },
-  { type: 'venue', text: '1inch — optimal route found', venue: '1inch', price: '$3,430.50', delay: 2800 },
-  { type: 'result', text: 'Negotiated: OKX at $3,421.50 — Saved $23.74 (0.69%)', delay: 3800 },
+  { type: 'system', text: 'Negotiating across 3 live exchanges...', delay: 800 },
+  { type: 'venue', text: 'OKX — negotiated via API', venue: 'okx', price: '$1,899.50', delay: 1600 },
+  { type: 'venue', text: 'Binance — maker rebate applied', venue: 'binance', price: '$1,908.60', delay: 2200 },
+  { type: 'venue', text: '1inch — optimal route found', venue: '1inch', price: '$1,905.20', delay: 2800 },
+  { type: 'result', text: 'Negotiated: OKX at $1,899.50 — Saved $12.90 (0.67%)', delay: 3800 },
 ]
 
 const LOOP_DELAY = 10000

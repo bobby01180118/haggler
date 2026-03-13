@@ -94,7 +94,7 @@ export default function History() {
         <div className="grid grid-cols-[1fr_0.8fr_0.8fr_0.8fr_0.6fr_0.6fr_auto] gap-3 px-5 py-3 text-xs font-medium text-slate-400 uppercase tracking-wider border-b border-slate-100">
           <span>Date</span>
           <span>Token</span>
-          <span>Venue</span>
+          <span>Exchange</span>
           <span className="text-right">Price</span>
           <span className="text-right">Fee</span>
           <span className="text-right">Total</span>

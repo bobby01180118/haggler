@@ -38,7 +38,7 @@ export default function ComparisonTable({ step }: Props) {
           <table className="w-full text-sm">
             <thead>
               <tr className="text-xs text-slate-400 border-b border-slate-100">
-                <th className="text-left px-4 py-2 font-medium">Venue</th>
+                <th className="text-left px-4 py-2 font-medium">Exchange</th>
                 <th className="text-right px-4 py-2 font-medium">Price</th>
                 <th className="text-right px-4 py-2 font-medium">Fee</th>
                 <th className="text-right px-4 py-2 font-medium">Total</th>
