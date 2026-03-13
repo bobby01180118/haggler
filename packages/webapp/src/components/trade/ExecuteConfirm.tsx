@@ -3,7 +3,8 @@ import { motion } from 'framer-motion'
 import type { AgentStep, ComparisonResult } from '@haggler/core'
 import { formatCurrency } from '@haggler/core'
 import { useTradeStore } from '../../store/useTradeStore'
-import { CheckCircle, X, Clock, Info } from 'lucide-react'
+import { useSettingsStore, getOKXCredentials } from '../../store/useSettingsStore'
+import { CheckCircle, X, Clock, Info, AlertTriangle, Settings } from 'lucide-react'
 
 interface Props {
   step: AgentStep
@@ -14,10 +15,15 @@ export default function ExecuteConfirm({ step }: Props) {
   const { executeTrade, isRunning } = useTradeStore()
   const [secondsLeft, setSecondsLeft] = useState<number | null>(null)
 
+  const demoMode = useSettingsStore((s) => s.demoMode)
   const best = comparison?.best
   const savings = comparison?.savings ?? 0
   const fees = best?.fees
   const expiresAt = best?.expiresAt
+
+  // Check if credentials are needed but missing
+  const needsOKXCreds = !demoMode && best?.venue === 'okx' && !getOKXCredentials()
+  const needsBinanceCreds = !demoMode && best?.venue === 'binance' // Binance auth not implemented yet
 
   // Countdown timer
   useEffect(() => {
@@ -96,6 +102,25 @@ export default function ExecuteConfirm({ step }: Props) {
           </div>
         )}
 
+        {/* Credential warning */}
+        {needsOKXCreds && (
+          <div className="flex items-start gap-1.5 text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-3">
+            <AlertTriangle className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+            <span>
+              OKX API keys required to execute.{' '}
+              <a href="/settings" className="underline font-medium hover:text-amber-700">
+                <Settings className="w-3 h-3 inline" /> Configure in Settings
+              </a>
+            </span>
+          </div>
+        )}
+        {needsBinanceCreds && (
+          <div className="flex items-start gap-1.5 text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-2 mb-3">
+            <AlertTriangle className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" />
+            <span>Binance execution coming soon. Trade will be simulated.</span>
+          </div>
+        )}
+
         {/* Info text */}
         <div className="flex items-start gap-1.5 text-xs text-slate-400 mb-3">
           <Info className="w-3 h-3 mt-0.5 flex-shrink-0" />
@@ -105,11 +130,11 @@ export default function ExecuteConfirm({ step }: Props) {
         <div className="flex gap-2">
           <button
             onClick={handleExecute}
-            disabled={isRunning || expired}
+            disabled={isRunning || expired || needsOKXCreds}
             className="flex items-center gap-1.5 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <CheckCircle className="w-3.5 h-3.5" />
-            {expired ? 'Quote Expired' : 'Execute Trade'}
+            {expired ? 'Quote Expired' : needsOKXCreds ? 'API Keys Required' : 'Execute Trade'}
           </button>
           <button
             disabled={isRunning}

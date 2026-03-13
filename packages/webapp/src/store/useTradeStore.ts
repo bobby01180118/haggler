@@ -47,20 +47,44 @@ export const useTradeStore = create<TradeState>((set, get) => ({
 
   startTrade: async (input) => {
     set({ isRunning: true, comparison: null })
-    const engine = getEngine()
-    const result = await engine.comparePrices(input, (step) => {
-      get().addStep(step)
-    })
-    set({ isRunning: false, comparison: result })
+    try {
+      const engine = getEngine()
+      const result = await engine.comparePrices(input, (step) => {
+        get().addStep(step)
+      })
+      set({ isRunning: false, comparison: result })
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Something went wrong'
+      get().addStep({
+        id: `error-${Date.now()}`,
+        type: 'system',
+        status: 'error',
+        message: `Error: ${message}`,
+        timestamp: Date.now(),
+      })
+      set({ isRunning: false })
+    }
   },
 
   executeTrade: async (quote) => {
     set({ isRunning: true })
-    const engine = getEngine()
-    await engine.executeTrade(quote, (step) => {
-      get().addStep(step)
-    })
-    set({ isRunning: false })
+    try {
+      const engine = getEngine()
+      await engine.executeTrade(quote, (step) => {
+        get().addStep(step)
+      })
+      set({ isRunning: false })
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Trade execution failed'
+      get().addStep({
+        id: `error-${Date.now()}`,
+        type: 'result',
+        status: 'error',
+        message: `Error: ${message}`,
+        timestamp: Date.now(),
+      })
+      set({ isRunning: false })
+    }
   },
 
   reset: () => {

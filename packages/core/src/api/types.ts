@@ -34,6 +34,7 @@ export interface OrderParams {
   sz: string                // size (amount)
   px?: string               // price (required for limit)
   clOrdId?: string          // client order ID
+  tag?: string              // broker/affiliate tag for revenue attribution
 }
 
 export interface OrderResult {

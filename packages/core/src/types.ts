@@ -43,6 +43,10 @@ export interface VenueQuote {
   negotiated: boolean
   expiresAt?: number
   fees?: FeeBreakdown
+  // Trade context — populated during comparePrices so executeTrade knows what to order
+  token?: string
+  amount?: number
+  side?: TradeAction
 }
 
 export type TradeStatus = 'pending' | 'submitted' | 'filled' | 'failed' | 'cancelled'

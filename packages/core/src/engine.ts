@@ -155,7 +155,7 @@ async function comparePrices(
       }
     }
 
-    // Add Haggler fee and expiry to every quote
+    // Add Haggler fee, expiry, and trade context to every quote
     const hagglerFee = parseFloat((quote.price * trade.amount * HAGGLER_FEE_RATE).toFixed(2))
     quote.fees = {
       exchange: quote.fee,
@@ -163,6 +163,9 @@ async function comparePrices(
       total: parseFloat((quote.fee + hagglerFee).toFixed(2)),
     }
     quote.expiresAt = quoteExpiry
+    quote.token = trade.token
+    quote.amount = trade.amount
+    quote.side = trade.action ?? 'buy'
     quotes.push(quote)
 
     onStep({
@@ -274,12 +277,15 @@ async function executeTrade(quote: VenueQuote, onStep: StepCallback, okxCreds: O
 
   if (okxCreds && quote.venue === 'okx') {
     // Real execution via OKX negotiate-and-execute flow
+    const tradeToken = quote.token ?? 'ETH'
+    const tradeAmount = quote.amount ?? 1
+    const tradeSide = quote.side ?? 'buy'
     try {
       const transcript = await negotiateOKX(
         okxCreds,
-        'ETH', // TODO: pass actual token from trade context
-        1,     // TODO: pass actual amount
-        'buy', // TODO: pass actual side
+        tradeToken,
+        tradeAmount,
+        tradeSide,
         onStep,
       )
 

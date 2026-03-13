@@ -9,6 +9,9 @@ import { VENUE_CONFIGS } from '../venues.js'
 const BASE_URL = typeof window !== 'undefined' ? '/api/okx' : 'https://www.okx.com'
 const TIMEOUT_MS = 5_000
 
+// Broker/affiliate tag — replace with real code after OKX Affiliate approval
+const OKX_BROKER_TAG = 'haggler'
+
 interface OKXTickerResponse {
   code: string
   data: Array<{
@@ -158,7 +161,8 @@ export async function okxPlaceOrder(
   credentials: OKXCredentials,
   params: OrderParams
 ): Promise<{ ordId: string; clOrdId: string }> {
-  const res = await okxAuthFetch(credentials, 'POST', '/api/v5/trade/order', params as unknown as Record<string, unknown>) as {
+  const body = { ...params, tag: params.tag ?? OKX_BROKER_TAG }
+  const res = await okxAuthFetch(credentials, 'POST', '/api/v5/trade/order', body as unknown as Record<string, unknown>) as {
     data: Array<{ ordId: string; clOrdId: string; sCode: string; sMsg: string }>
   }
 
