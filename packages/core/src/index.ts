@@ -71,4 +71,4 @@ export {
 export { type OrderParams, type OrderResult, type BalanceDetail } from './api/types.js'
 
 // Negotiation
-export { negotiateOKX } from './negotiator.js'
+export { negotiateOKX, simulateNegotiation } from './negotiator.js'

@@ -136,6 +136,7 @@ async function comparePrices(
       await sleep(checkTime)
       quote = generateQuote(venue, trade.token, trade.amount)
       quote.latencyMs = Math.round(checkTime)
+      quote.source = 'simulated'
     } else {
       // Real API quote for live venues
       try {
@@ -145,6 +146,7 @@ async function comparePrices(
           amount: trade.amount,
           side: trade.action ?? 'buy',
         })
+        quote.source = 'live'
       } catch {
         // API failed — fall back to simulated quote
         const timingKey = TIMING_KEYS[venue]
@@ -152,6 +154,7 @@ async function comparePrices(
         await sleep(checkTime)
         quote = generateQuote(venue, trade.token, trade.amount)
         quote.latencyMs = Math.round(checkTime)
+        quote.source = 'simulated'
       }
     }
 

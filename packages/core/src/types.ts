@@ -43,6 +43,8 @@ export interface VenueQuote {
   negotiated: boolean
   expiresAt?: number
   fees?: FeeBreakdown
+  // Data source — "live" from real API, "simulated" from generated data
+  source?: 'live' | 'simulated'
   // Trade context — populated during comparePrices so executeTrade knows what to order
   token?: string
   amount?: number
