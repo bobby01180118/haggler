@@ -1,4 +1,9 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
-  "outputDirectory": "packages/webapp/dist"
+  "buildCommand": "npm run build:webapp",
+  "outputDirectory": "packages/webapp/dist",
+  "rewrites": [
+    { "source": "/api/okx/:path*", "destination": "https://www.okx.com/:path*" },
+    { "source": "/api/1inch/:path*", "destination": "https://api.1inch.dev/:path*" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
 }
