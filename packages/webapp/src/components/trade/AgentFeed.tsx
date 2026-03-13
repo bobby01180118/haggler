@@ -27,10 +27,10 @@ export default function AgentFeed() {
           <Bot className="w-8 h-8 text-indigo-600" />
         </div>
         <h2 className="text-xl font-semibold text-slate-900 mb-2">
-          What do you want to trade?
+          Try the agent
         </h2>
         <p className="text-sm text-slate-500 max-w-md mb-6">
-          Type something like "Buy 1 ETH" or tap a suggestion below
+          Type a trade and watch the MCP tools work in real-time
         </p>
         <div className="flex flex-wrap gap-2 justify-center">
           {QUICK_SUGGESTIONS.map((s) => (

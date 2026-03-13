@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Zap, Settings, Clock } from 'lucide-react'
+import { Zap, Settings, Clock, Github } from 'lucide-react'
 
 export default function Navbar() {
   const location = useLocation()
@@ -23,7 +23,7 @@ export default function Navbar() {
                 : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
             }`}
           >
-            Trade
+            Demo
           </Link>
           <Link
             to="/history"
@@ -45,6 +45,14 @@ export default function Navbar() {
           >
             <Settings className="w-4 h-4" />
           </Link>
+          <a
+            href="https://github.com/bobby01180118/haggler"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="p-2.5 rounded-full transition-all duration-200 text-slate-400 hover:text-slate-900 hover:bg-slate-50"
+          >
+            <Github className="w-4 h-4" />
+          </a>
         </div>
       </div>
     </nav>

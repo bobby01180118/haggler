@@ -14,7 +14,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/haggler-ai/haggler"
+              href="https://github.com/bobby01180118/haggler"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-slate-600 transition-colors"
@@ -24,7 +24,7 @@ export default function Footer() {
             </a>
             <span className="text-slate-200">|</span>
             <p className="text-sm text-slate-400">
-              Your keys stay local. Never custodial.
+              Open-source crypto infrastructure for the agent era.
             </p>
           </div>
 

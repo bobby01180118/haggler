@@ -28,7 +28,7 @@ export default function Venues() {
           viewport={{ once: true }}
           className="text-center text-sm text-slate-400 uppercase tracking-widest font-medium mb-12"
         >
-          Connected Exchanges
+          Supported Exchanges
         </motion.p>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 max-w-4xl mx-auto">

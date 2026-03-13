@@ -12,7 +12,7 @@ export default function Trade() {
         <div className="sticky top-0 z-20 flex items-center justify-center gap-2 bg-amber-50 border-b border-amber-200 px-4 py-2 text-sm text-amber-800">
           <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0" />
           <span className="font-medium">DEMO MODE</span>
-          <span className="hidden sm:inline">— prices are simulated, no real trades</span>
+          <span className="hidden sm:inline">— you're watching Haggler's MCP tools in action. Prices are simulated.</span>
         </div>
       )}
       <AgentFeed />

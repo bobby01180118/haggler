@@ -104,11 +104,14 @@ export default function NegotiationDemo() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
+          <code className="inline-block px-3 py-1 mb-4 text-xs font-mono bg-slate-100 text-slate-500 rounded-full">
+            compare_prices({'{'} token: "ETH", amount: 1 {'}'})
+          </code>
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Watch your agent negotiate
+            See what one API call looks like
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Your agent haggles with OKX while simultaneously scanning every other exchange for leverage
+            Your agent negotiates with OKX while simultaneously scanning Binance and 1inch for leverage
           </p>
         </motion.div>
 

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown, Github, ShieldCheck, UserX } from 'lucide-react'
+import { ArrowRight, Github, ShieldCheck, Plug } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 export default function Hero() {
@@ -14,7 +14,7 @@ export default function Hero() {
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-500 text-xs font-medium mb-8 shadow-sm"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          Live on OKX, Binance, 1inch
+          MCP Server &middot; 6 tools &middot; 3 exchanges
         </motion.div>
 
         {/* Headline */}
@@ -24,9 +24,9 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]"
         >
-          Stop overpaying
+          Crypto trading
           <br />
-          <span className="gradient-text">for crypto</span>
+          <span className="gradient-text">for the agent era</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -36,7 +36,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
         >
-          Haggler scans OKX, Binance, and 1inch — negotiates better rates — and saves you 0.5–1.5% per trade.
+          One MCP server. Six tools. Three exchanges normalized. Give any AI agent the power to compare, negotiate, and execute crypto trades.
         </motion.p>
 
         {/* CTAs */}
@@ -50,15 +50,17 @@ export default function Hero() {
             to="/trade"
             className="group flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full transition-all duration-200 text-base shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40"
           >
-            Try it free
+            Try the demo
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <a
-            href="#demo"
+            href="https://github.com/bobby01180118/haggler"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-medium rounded-full transition-all duration-200 text-base border border-slate-200 hover:border-slate-300 shadow-sm"
           >
-            See how it works
-            <ChevronDown className="w-4 h-4" />
+            View on GitHub
+            <Github className="w-4 h-4" />
           </a>
         </motion.div>
 
@@ -78,8 +80,8 @@ export default function Hero() {
             Keys never leave your device
           </span>
           <span className="flex items-center gap-1.5">
-            <UserX className="w-3.5 h-3.5" />
-            No account required
+            <Plug className="w-3.5 h-3.5" />
+            MCP native
           </span>
         </motion.div>
 
@@ -91,8 +93,8 @@ export default function Hero() {
           className="flex items-center justify-center gap-8 sm:gap-16 mt-12 pt-8 border-t border-slate-200/60"
         >
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900">0.5–1.5%</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Average savings</div>
+            <div className="text-2xl sm:text-3xl font-bold text-slate-900">6</div>
+            <div className="text-xs sm:text-sm text-slate-400 mt-1">MCP tools</div>
           </div>
           <div className="text-center">
             <div className="text-2xl sm:text-3xl font-bold text-slate-900">3</div>

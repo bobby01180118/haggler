@@ -89,7 +89,7 @@ export default function TradeInput() {
             type="text"
             value={input}
             onChange={(e) => handleChange(e.target.value)}
-            placeholder="Buy 1 ETH at the best price"
+            placeholder="Buy 1 ETH — watch the agent work"
             disabled={isRunning}
             className={`flex-1 bg-slate-50 border rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition-colors disabled:opacity-50 ${
               apiKeyWarning

@@ -39,7 +39,8 @@ export default function Settings() {
 
   return (
     <div className="max-w-2xl mx-auto px-6 py-12">
-      <h1 className="text-2xl font-bold text-slate-900 mb-8">Settings</h1>
+      <h1 className="text-2xl font-bold text-slate-900 mb-2">Settings</h1>
+      <p className="text-sm text-slate-500 mb-8">Configure exchange credentials for the MCP server. Stored locally on your device.</p>
 
       {/* Demo Mode */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 mb-6 shadow-sm">
