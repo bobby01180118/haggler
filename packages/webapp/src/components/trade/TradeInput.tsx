@@ -3,22 +3,18 @@ import { Send, ShieldAlert } from 'lucide-react'
 import { useTradeStore } from '../../store/useTradeStore'
 
 const SUGGESTIONS = [
-  'Buy 1 ETH',
-  'Buy 0.5 BTC',
-  'Buy 100 SOL',
+  'Buy $10000 of ETH',
+  'Sell 0.5 BTC',
+  'Buy 250 SOL',
   'Buy $5000 of ETH',
 ]
 
 /** Detect API-key-like strings to prevent accidental paste */
 function looksLikeApiKey(text: string): boolean {
   const trimmed = text.trim()
-  // "sk-" prefix (OpenAI, Stripe, etc.)
   if (/^sk-[a-zA-Z0-9]{20,}/.test(trimmed)) return true
-  // Long hex strings (40+ chars)
   if (/^[0-9a-fA-F]{40,}$/.test(trimmed)) return true
-  // AWS-style keys
   if (/^AKIA[0-9A-Z]{16}/.test(trimmed)) return true
-  // Generic long alphanumeric secrets (64+ chars, no spaces)
   if (/^[A-Za-z0-9+/=_-]{64,}$/.test(trimmed) && !trimmed.includes(' ')) return true
   return false
 }
@@ -89,7 +85,7 @@ export default function TradeInput() {
             type="text"
             value={input}
             onChange={(e) => handleChange(e.target.value)}
-            placeholder="Buy 1 ETH — watch the agent work"
+            placeholder="Tell Haggler what your agent wants — &quot;Buy $10000 of ETH&quot;, &quot;Sell 0.5 BTC&quot;"
             disabled={isRunning}
             className={`flex-1 bg-slate-50 border rounded-xl px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition-colors disabled:opacity-50 ${
               apiKeyWarning

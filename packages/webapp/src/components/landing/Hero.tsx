@@ -1,110 +1,168 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Github, ShieldCheck, Plug } from 'lucide-react'
+import { ArrowRight, Bot, Globe, Shield, Zap } from 'lucide-react'
 import { motion } from 'framer-motion'
+
+const allocations = [
+  { venue: 'OKX Earn', apy: '4.6%', amount: '$400K', share: '40%' },
+  { venue: 'Binance Earn', apy: '4.2%', amount: '$350K', share: '35%' },
+  { venue: 'Aave V3', apy: '3.8%', amount: '$250K', share: '25%' },
+]
+
+const proofPoints = [
+  {
+    icon: Zap,
+    label: 'Constraint aware',
+    description: 'Respects concentration caps and rebalance rules.',
+  },
+  {
+    icon: Globe,
+    label: 'Cross-provider',
+    description: 'Searches across the liquidity graph, not one venue.',
+  },
+  {
+    icon: Shield,
+    label: 'Verifiable',
+    description: 'Returns route, fees, and an execution receipt.',
+  },
+]
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden min-h-[90vh] flex items-center stripe-mesh">
-      <div className="max-w-5xl mx-auto px-6 pt-20 pb-20 text-center">
-        {/* Pill badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-slate-200 bg-white text-slate-500 text-xs font-medium mb-8 shadow-sm"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          MCP Server &middot; 6 tools &middot; 3 exchanges
-        </motion.div>
+    <section className="relative overflow-hidden marketing-section stripe-mesh">
+      <div className="marketing-shell pt-10">
+        <div className="grid gap-12 items-center lg:grid-cols-[1.05fr_0.95fr]">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-slate-500 mb-6 shadow-sm"
+            >
+              Fits into the agent stack you already use
+            </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-slate-900 mb-8 leading-[1.1]"
-        >
-          Crypto trading
-          <br />
-          <span className="gradient-text">for the agent era</span>
-        </motion.h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="marketing-display text-[clamp(4rem,9vw,6.6rem)] text-[var(--marketing-text)] mb-8"
+            >
+              The broker that
+              <br />
+              <span className="gradient-text">understands you</span>
+            </motion.h1>
 
-        {/* Subheadline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg sm:text-xl text-slate-500 max-w-2xl mx-auto mb-12 leading-relaxed"
-        >
-          One MCP server. Six tools. Three exchanges normalized. Give any AI agent the power to compare, negotiate, and execute crypto trades.
-        </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="text-lg sm:text-xl text-[var(--marketing-muted)] max-w-2xl mb-8 leading-relaxed"
+            >
+              Your agent says what should happen. Haggler finds the best executable route across liquidity providers
+              and returns the route, fees, and execution trail.
+            </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
-        >
-          <Link
-            to="/trade"
-            className="group flex items-center gap-2 px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full transition-all duration-200 text-base shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40"
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
+              className="flex flex-col sm:flex-row gap-3 mb-6"
+            >
+              <a
+                href="#developers"
+                className="marketing-primary-button inline-flex items-center justify-center gap-2 px-8 py-3.5 font-semibold rounded-full transition-colors text-base"
+              >
+                Connect your agent
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <Link
+                to="/demo"
+                className="marketing-secondary-button inline-flex items-center justify-center gap-2 px-8 py-3.5 font-medium rounded-full transition-colors text-base"
+              >
+                Try demo
+              </Link>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="text-[13px] font-medium text-[var(--marketing-muted)]"
+            >
+              Private strategy in. Route and receipt back out.
+            </motion.p>
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18 }}
           >
-            Try the demo
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <a
-            href="https://github.com/bobby01180118/haggler"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-700 font-medium rounded-full transition-all duration-200 text-base border border-slate-200 hover:border-slate-300 shadow-sm"
-          >
-            View on GitHub
-            <Github className="w-4 h-4" />
-          </a>
-        </motion.div>
+            <div className="marketing-surface rounded-[28px] overflow-hidden">
+              <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--marketing-line)]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-indigo-50 border border-indigo-100 flex items-center justify-center">
+                    <Bot className="w-5 h-5 text-indigo-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-[var(--marketing-text)]">Agent request</p>
+                    <p className="text-xs text-[var(--marketing-muted)]">A broker job, described once.</p>
+                  </div>
+                </div>
+                <span className="text-[10px] font-medium uppercase tracking-[0.25em] text-[var(--marketing-muted)]">3-second proof</span>
+              </div>
 
-        {/* Trust badges */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex items-center justify-center gap-6 sm:gap-8 mt-10 text-xs text-slate-400"
-        >
-          <span className="flex items-center gap-1.5">
-            <Github className="w-3.5 h-3.5" />
-            Open source
-          </span>
-          <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-3.5 h-3.5" />
-            Keys never leave your device
-          </span>
-          <span className="flex items-center gap-1.5">
-            <Plug className="w-3.5 h-3.5" />
-            MCP native
-          </span>
-        </motion.div>
+              <div className="p-5 sm:p-6 space-y-4">
+                <div className="marketing-terminal p-4">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-slate-500 mb-2">Your agent</p>
+                  <p className="text-sm sm:text-base font-mono leading-relaxed text-slate-100">
+                    Find the best yield for 1M USDC. Keep each venue under 40%. Rebalance monthly.
+                  </p>
+                </div>
 
-        {/* Stats row */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="flex items-center justify-center gap-8 sm:gap-16 mt-12 pt-8 border-t border-slate-200/60"
-        >
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900">6</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">MCP tools</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900">3</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Live exchanges</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-bold text-slate-900">&lt;10s</div>
-            <div className="text-xs sm:text-sm text-slate-400 mt-1">Per negotiation</div>
-          </div>
-        </motion.div>
+                <div className="rounded-2xl border border-indigo-100 bg-indigo-50/70 p-4">
+                  <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-indigo-600 mb-2">
+                    Haggler understood
+                  </p>
+                  <p className="text-sm text-[var(--marketing-text)] leading-relaxed">
+                    Cross-platform yield optimization with a concentration cap, venue allocation limits, and a recurring
+                    rebalance rule.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-slate-100 bg-slate-50/90 p-4 space-y-3">
+                  {allocations.map((allocation) => (
+                    <div key={allocation.venue} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3 border border-slate-100">
+                      <div>
+                        <p className="text-sm font-medium text-[var(--marketing-text)]">{allocation.venue}</p>
+                        <p className="text-xs text-emerald-600 font-mono">{allocation.apy} APY</p>
+                      </div>
+                      <div className="ml-auto text-right">
+                        <p className="text-sm font-mono text-[var(--marketing-text)]">{allocation.amount}</p>
+                        <p className="text-xs text-slate-500">{allocation.share}</p>
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="flex items-center justify-between rounded-2xl bg-emerald-50 border border-emerald-100 px-4 py-3">
+                    <span className="text-sm text-slate-500">Projected annual yield</span>
+                    <span className="text-sm font-semibold text-emerald-600 font-mono">$42,600</span>
+                  </div>
+                </div>
+
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {proofPoints.map((item) => (
+                    <div key={item.label} className="rounded-2xl border border-slate-100 bg-white px-4 py-3">
+                      <item.icon className="w-4 h-4 text-[var(--marketing-text)] mb-2" />
+                      <p className="text-sm font-medium text-[var(--marketing-text)] mb-1">{item.label}</p>
+                      <p className="text-xs text-slate-500 leading-relaxed">{item.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

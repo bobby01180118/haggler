@@ -134,10 +134,11 @@ export default function Settings() {
             {apiKeys.binance?.trim() ? '✅ Connected' : '⭕ Not configured'}
           </span>
         </div>
-        <div className="flex items-center gap-1.5 mb-5">
+        <div className="flex items-center gap-1.5 mb-2">
           <Shield className="w-3.5 h-3.5 text-emerald-600" />
           <p className="text-xs text-slate-500">Keys stored locally. Never sent to any server.</p>
         </div>
+        <p className="text-xs text-indigo-500 mb-5">Unlocks Binance Convert API with 0% trading fee.</p>
 
         <div className="space-y-3">
           <CredentialInput label="API Key" value={apiKeys.binance ?? ''} onChange={(v) => setApiKey('binance', v)} show={showFields['binance-key']} onToggle={() => toggleShow('binance-key')} placeholder="Binance API key" />

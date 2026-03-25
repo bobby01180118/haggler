@@ -108,10 +108,10 @@ export default function NegotiationDemo() {
             compare_prices({'{'} token: "ETH", amount: 1 {'}'})
           </code>
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            See what one API call looks like
+            Watch Haggler negotiate in real-time
           </h2>
           <p className="text-slate-500 text-lg max-w-2xl mx-auto">
-            Your agent negotiates with OKX while simultaneously scanning Binance and 1inch for leverage
+            Haggler negotiates with OKX while simultaneously scanning Binance and 1inch for leverage
           </p>
         </motion.div>
 

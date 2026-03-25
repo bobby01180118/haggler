@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
+import { Check } from 'lucide-react'
 
 export default function Pricing() {
   return (
@@ -11,20 +12,42 @@ export default function Pricing() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-            Free to build with
+            Simple, transparent pricing
           </h2>
-          <p className="text-slate-500 text-lg mb-2">
-            The MCP server is open source and free to use. Compare prices at zero cost. <span className="font-semibold text-slate-700">0.05%</span> fee only on executed trades.
-          </p>
-          <p className="text-slate-400 text-sm mb-10">
-            That's $5 on a $10,000 trade. No subscriptions, no hidden fees.
+          <p className="text-slate-500 text-lg mb-8">
+            Compare prices for free. Pay only when you execute.
           </p>
 
+          <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm max-w-md mx-auto text-left mb-8">
+            <div className="text-center mb-6">
+              <span className="text-4xl font-bold text-slate-900">0.05%</span>
+              <span className="text-slate-400 ml-2">per trade</span>
+            </div>
+            <div className="space-y-3 mb-6">
+              {[
+                'Price comparison — always free',
+                'Natural language orders',
+                'Cross-venue best execution',
+                'OKX smart trading negotiation',
+                'Full audit trail',
+                'No exchange accounts needed',
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-2.5 text-sm text-slate-600">
+                  <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                  {item}
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-slate-400 text-center">
+              $10K trade = $5 fee. No subscriptions, no hidden fees.
+            </p>
+          </div>
+
           <Link
-            to="/trade"
+            to="/app"
             className="inline-flex items-center gap-2 px-10 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-full transition-all duration-200 text-base shadow-lg shadow-indigo-500/25 hover:shadow-indigo-500/40"
           >
-            Get Started
+            Try it free
           </Link>
         </motion.div>
       </div>

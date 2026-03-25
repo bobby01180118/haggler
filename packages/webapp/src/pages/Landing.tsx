@@ -1,23 +1,23 @@
 import Hero from '../components/landing/Hero'
-import Architecture from '../components/landing/Architecture'
-import NegotiationDemo from '../components/landing/NegotiationDemo'
-import IntegrationShowcase from '../components/landing/IntegrationShowcase'
-import HowItWorks from '../components/landing/HowItWorks'
-import Pricing from '../components/landing/Pricing'
-import Venues from '../components/landing/Venues'
-import DevCTA from '../components/landing/DevCTA'
+import ThreeEras from '../components/landing/ThreeEras'
+import ProofPoint from '../components/landing/ProofPoint'
+import ArchitectureDiagram from '../components/landing/ArchitectureDiagram'
+import WhatYouCanSay from '../components/landing/WhatYouCanSay'
+import OnChainVerification from '../components/landing/OnChainVerification'
+import LiquidityNetwork from '../components/landing/LiquidityNetwork'
+import ForDevelopers from '../components/landing/ForDevelopers'
 
 export default function Landing() {
   return (
-    <div>
+    <div className="marketing-page">
       <Hero />
-      <Architecture />
-      <NegotiationDemo />
-      <IntegrationShowcase />
-      <HowItWorks />
-      <Pricing />
-      <Venues />
-      <DevCTA />
+      <ThreeEras />
+      <ProofPoint />
+      <ArchitectureDiagram />
+      <WhatYouCanSay />
+      <OnChainVerification />
+      <LiquidityNetwork />
+      <ForDevelopers />
     </div>
   )
 }

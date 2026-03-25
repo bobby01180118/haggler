@@ -3,7 +3,7 @@ import { useTradeStore } from '../../store/useTradeStore'
 import AgentMessage from './AgentMessage'
 import { Bot } from 'lucide-react'
 
-const QUICK_SUGGESTIONS = ['Buy 1 ETH', 'Buy 0.5 BTC', 'Buy 100 SOL']
+const QUICK_SUGGESTIONS = ['Buy $10000 of ETH', 'Sell 0.5 BTC', 'Buy 250 SOL']
 
 export default function AgentFeed() {
   const steps = useTradeStore((s) => s.steps)
@@ -27,10 +27,10 @@ export default function AgentFeed() {
           <Bot className="w-8 h-8 text-indigo-600" />
         </div>
         <h2 className="text-xl font-semibold text-slate-900 mb-2">
-          Try the agent
+          What should your agent ask Haggler to do?
         </h2>
         <p className="text-sm text-slate-500 max-w-md mb-6">
-          Type a trade and watch the MCP tools work in real-time
+          Use the public demo to see how Haggler turns one plain-English request into the best route across venues.
         </p>
         <div className="flex flex-wrap gap-2 justify-center">
           {QUICK_SUGGESTIONS.map((s) => (

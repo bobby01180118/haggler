@@ -7,12 +7,12 @@ export default function Trade() {
   const demoMode = useSettingsStore((s) => s.demoMode)
 
   return (
-    <div className="flex flex-col h-[calc(100vh-3.5rem)]">
+    <div className="flex flex-col h-[calc(100vh-3.5rem)] bg-white">
       {demoMode && (
         <div className="sticky top-0 z-20 flex items-center justify-center gap-2 bg-amber-50 border-b border-amber-200 px-4 py-2 text-sm text-amber-800">
           <AlertTriangle className="w-4 h-4 text-amber-600 flex-shrink-0" />
-          <span className="font-medium">DEMO MODE</span>
-          <span className="hidden sm:inline">— you're watching Haggler's MCP tools in action. Prices are simulated.</span>
+          <span className="font-medium">PUBLIC DEMO</span>
+          <span className="hidden sm:inline">— live prices, simulated execution. No connected accounts required.</span>
         </div>
       )}
       <AgentFeed />
